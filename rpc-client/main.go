@@ -7,7 +7,7 @@ import (
 
 func main() {
 	client, err := rpc.DialHTTP("tcp", "127.0.0.1:1234")
-	fmt.Println("err:",err)
+	fmt.Println("err:", err)
 	if err != nil {
 		fmt.Println("链接rpc服务器失败:", err)
 	}

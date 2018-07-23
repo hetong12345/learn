@@ -7,9 +7,10 @@ import (
 	"net/http"
 	"net/rpc"
 )
+
 type Watcher int
 
-var c  int = 0
+var c int = 0
 
 func (w *Watcher) GetInfo(arg int, result *int) error {
 	c += arg

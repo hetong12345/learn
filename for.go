@@ -21,8 +21,8 @@ func main() {
 }
 
 func SignalProc() {
-	sigs:= make(chan os.Signal)
-	signal.Notify(sigs, syscall.SIGINT, syscall.SIGUSR1, syscall.SIGUSR2, syscall.SIGHUP,os.Interrupt)
+	sigs := make(chan os.Signal)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGUSR1, syscall.SIGUSR2, syscall.SIGHUP, os.Interrupt)
 
 	for {
 		msg := <-sigs

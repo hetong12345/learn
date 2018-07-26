@@ -26,4 +26,3 @@ func (r Ret) Post(url string) string {
 	}
 	return string(res)
 }
-

@@ -11,6 +11,14 @@ type Retriever struct {
 	TimeOut   time.Duration
 }
 
+func String() string {
+
+	return "a"
+}
+func Read() {
+
+}
+
 func (r *Retriever) Get(url string) string {
 	resp, err := http.Get(url)
 	if err != nil {

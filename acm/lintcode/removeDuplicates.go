@@ -1,10 +1,10 @@
-package acm
+package lintcode
 
 import (
 	"fmt"
 )
 
-func RemoveDuplicates(nums []int) int {
+func RemoveDuplicates(nums []int) int { //移除重复数
 	if len(nums) == 0 {
 		return 0
 	} else {

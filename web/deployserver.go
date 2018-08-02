@@ -1,50 +1,50 @@
 package main
 
 import (
+	"io/ioutil"
 	"net/http"
 	"os"
-	"io/ioutil"
 )
-type appHandler func(w http.ResponseWriter,r *http.Request) error
 
-func errApper(handler appHandler) func (w http.ResponseWriter,r *http.Request){
+type appHandler func(w http.ResponseWriter, r *http.Request) error
+
+func errApper(handler appHandler) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		err:= handler(w,r)
-		if err!=nil {
+		err := handler(w, r)
+		if err != nil {
 
-			code:=http.StatusOK
-			switch  {
+			code := http.StatusOK
+			switch {
 			case os.IsNotExist(err):
-				code=http.StatusNotFound
+				code = http.StatusNotFound
 			case os.IsTimeout(err):
-				code=http.StatusRequestTimeout
+				code = http.StatusRequestTimeout
 			default:
-				code=http.StatusInternalServerError
+				code = http.StatusInternalServerError
 			}
-			http.Error(w,http.StatusText(code),code)
+			http.Error(w, http.StatusText(code), code)
 		}
 	}
 }
 func main() {
-	http.HandleFunc("/list/",errApper(HandleList))
-	err:=http.ListenAndServe(":9999",nil)
-	if err!=nil {
+	http.HandleFunc("/list/", errApper(HandleList))
+	err := http.ListenAndServe(":9999", nil)
+	if err != nil {
 		panic(err)
 	}
 }
-func HandleList( writer http.ResponseWriter,request *http.Request)error {
+func HandleList(writer http.ResponseWriter, request *http.Request) error {
 
-
-	path:=request.URL.Path[len("/list/"):]
-	file,err:=os.Open(path)
-	if err!=nil {
-		http.Error(writer,err.Error(),http.StatusInternalServerError)
+	path := request.URL.Path[len("/list/"):]
+	file, err := os.Open(path)
+	if err != nil {
+		http.Error(writer, err.Error(), http.StatusInternalServerError)
 		return err
 	}
 	defer file.Close()
 
-	all,err:=ioutil.ReadAll(file)
-	if err!=nil {
+	all, err := ioutil.ReadAll(file)
+	if err != nil {
 		return err
 	}
 
@@ -70,6 +70,7 @@ func HandleList( writer http.ResponseWriter,request *http.Request)error {
 	//
 	//http.ListenAndServe(":9999",nil)
 }
+
 //func firstPage(w http.ResponseWriter, r *http.Request) {
 //	io.WriteString(w, "<h1>Hello World</h1>")
 //}

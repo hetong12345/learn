@@ -1,11 +1,11 @@
-package acm
+package lintcode
 
 import (
 	"fmt"
 	// "strconv"
 )
 
-func Oadd(a int64, b int64) int64 {
+func Oadd(a int64, b int64) int64 { //不使用加法，计算两数和
 	// fmt.Println("test")
 	r1 := a ^ b
 	r2 := a & b

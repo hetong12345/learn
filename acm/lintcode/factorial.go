@@ -1,4 +1,4 @@
-package acm
+package lintcode
 
 import (
 	// "fmt"
@@ -6,7 +6,7 @@ import (
 	// "strconv"
 )
 
-func Ofactorial(num int64) int64 {
+func Ofactorial(num int64) int64 { //计算阶乘0的个数
 	// fmt.Println(num / 5.0)
 	var tmp int64 = num
 	var n int

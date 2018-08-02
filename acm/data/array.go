@@ -2,112 +2,138 @@ package data
 
 import (
 	"fmt"
+	"log"
 )
 
-type Array struct {
-	data []int
+type arr struct {
+	data []interface{}
 	size int
 }
-var arr=Array{}
 
-func main() {
-	scores := [...]int{100, 56, 56}
-	fmt.Println(scores)
+func Create(cap int) *arr {
+	a := []interface{}{}
+	for i := 0; i < cap; i++ {
+		a = append(a, 0)
+	}
+	return &arr{
+		data: a,
+		size: 0,
+	}
+}
+func (a *arr) GetSize() int {
+	fmt.Println(a.data[0])
+	return a.size
+}
+func (a *arr) GetCap() int {
+	return len(a.data)
+}
+func (a *arr) AddLast(e interface{}) {
+	a.Add(a.size, e)
+	return
+}
+func (a *arr) Get(index int) interface{} {
+	if index < 0 || index >= a.size {
+		panic("shu zu qu chu chu cuo")
+	}
+	return a.data[index]
+}
+func (a *arr) Set(index int, e interface{}) {
+	if index < 0 || index >= a.size {
+		panic("shu zu xiu gai chu cuo")
+	}
+	a.data[index] = e
+}
+func (a *arr) AddFirst(e interface{}) {
+	a.Add(0, e)
+	return
+}
+func (a *arr) Add(index int, e interface{}) {
+
+	if index < 0 || index > a.size {
+		log.Println("fei fa weizhi ")
+		return
+	}
+	if a.size == len(a.data) {
+		a := a.resize(a.size * 2)
+		//fmt.Println(b)
+		//a=&b
+
+		fmt.Println(a)
+	}
+	fmt.Println(a)
+	for i := a.size - 1; i >= index; i-- {
+		a.data[i+1] = a.data[i]
+		//fmt.Println(a.data[i+1])
+	}
+	a.data[index] = e
+	a.size++
+	return
 
 }
-//func NewArray(cap int) {
-//	Array.Remove()
-//	arr.data=[cap]int
-//	arr.size =0
-//}
-//func (*Array)GetSize() int {
-//	return arr.size
-//}
-//func (*Array)GetCap() int {
-//	return len(arr.data)
-//}
-//func (*Array)IsEmpty() bool {
-//	return arr.size == 0
-//}
-//func (*Array)AddLast(e int) {
-//	arr.Add(arr.size,e)
-//}
-//func (*Array)AddFirst(e int)  {
-//	arr.Add(0,e)
-//}
-//func (*Array)Add(index int, e int) {
-//	if arr.size == len(arr.data) {
-//		panic("out of index")
-//	}
-//	if index < 0 || index > arr.size {
-//		panic("fei fa cha ru")
-//	}
-//	for i:=arr.size-1;i>=index ; i-- {
-//		arr.data[i+1]=arr.data[i]
-//	}
-//	arr.data[index]=e
-//	arr.size++
-//}
-//func (*Array)ToString()  {
-//	fmt.Printf("Array:size=%d,cap=%d\n",arr.size,len(arr.data))
-//	fmt.Print("[")
-//	for i:=0; i<arr.size; i++ {
-//		fmt.Print(arr.data[i])
-//		if i!=arr.size-1 {
-//			fmt.Print(",")
-//		}
-//	}
-//	fmt.Print("]")
-//}
-//
-//func (*Array)Get(index int ) int {
-//	if index < 0 || index > arr.size {
-//		panic("fei fa cha ru")
-//	}
-//	return arr.data[index]
-//}
-//func (*Array)Set(index int,e int )  {
-//	if index < 0 || index > arr.size {
-//		panic("fei fa cha ru")
-//	}
-//	arr.data[index]=e
-//}
-//func(*Array) Contains(e int ) bool {
-//	for i:=0;i<arr.size;i++ {
-//		if arr.data[i]==e {
-//			return true
-//		}
-//	}
-//	return false
-//}
-//func (*Array)Find(e int) int {
-//	for i:=0;i<arr.size;i++ {
-//		if arr.data[i]==e {
-//			return i
-//		}
-//	}
-//	return -1
-//}
-//func (*Array)Remove(index int) int {
-//	if index < 0 || index > arr.size {
-//		panic("fei fa cha ru")
-//	}
-//	ret:=arr.data[index]
-//	for i:=index+1;i<arr.size ;i++  {
-//		arr.data[i-1]=arr.data[i]
-//	}
-//	arr.size--
-//	return ret
-//}
-//func (*Array)RemoveFirst() int {
-//	return arr.Remove(0)
-//}
-//func(*Array) RemoveLast() int {
-//	return arr.Remove(arr.size)
-//}
-//func(*Array) RemoveElement(e int)  {
-//	index := arr.Find(e)
-//	if index!=-1 {
-//		arr.Remove(index)
-//	}
-//}
+func (a *arr) resize(len int) arr {
+	na := Create(len)
+	//fmt.Println(na,a)
+	for i := 0; i < a.size; i++ {
+		na.data[i] = a.data[i]
+		//fmt.Println(na.data[i],a.data[i])
+	}
+	//fmt.Println(*na)
+	return *na
+}
+func (a *arr) Remove(index int) interface{} {
+	if index < 0 || index > a.size {
+		panic("fei fa weizhi")
+	}
+	ret := a.data[index]
+	for i := index + 1; i < a.size; i++ {
+		a.data[i-1] = a.data[i]
+	}
+	a.size--
+	return ret
+
+}
+func (a *arr) RemoveFirst() interface{} {
+	return a.Remove(0)
+}
+func (a *arr) RemoveLast() interface{} {
+	return a.Remove(a.size - 1)
+}
+func (a *arr) RemoveElement(e interface{}) {
+	index := a.FindFirst(e)
+	if index != -1 {
+		a.Remove(index)
+	}
+}
+func (a *arr) Contains(e interface{}) bool {
+	for i := 0; i < a.size; i++ {
+		if a.data[i] == e {
+			return true
+		}
+	}
+	return false
+}
+func (a *arr) FindFirst(e interface{}) int {
+	for i := 0; i < a.size; i++ {
+		if a.data[i] == e {
+			return i
+		}
+	}
+	return -1
+}
+func (a *arr) IsEmpty() bool {
+	return a.size == 0
+}
+
+func (a *arr) String() string {
+	str := fmt.Sprintf("Array:size=%d,cap=%d\n", a.size, len(a.data))
+	str += fmt.Sprint(("["))
+	for i := 0; i < a.size; i++ {
+		str += fmt.Sprint((*a).data[i])
+		if i != a.size-1 {
+			str += fmt.Sprint(",")
+		}
+	}
+	str += fmt.Sprint("]")
+	//fmt.Println(str)
+	return str
+}

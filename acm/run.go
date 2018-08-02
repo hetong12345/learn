@@ -1,7 +1,8 @@
 package main
 
 import (
-	"./lintcode"
+	"./data"
+	"fmt"
 )
 
 type student struct {
@@ -10,6 +11,15 @@ type student struct {
 }
 
 func main() {
-	println(lintcode.KthLargest(4 ,[]int{5,1,6,8,3,1,78,8}))
+
+	a:=data.Create(5)
+	for i := 0; i<100;i++  {
+		a.AddLast(student{"test",i})
+	}
+	fmt.Println(a.String())
+	for i:=0;i<60 ;i++  {
+		a.RemoveLast()
+	}
+	fmt.Println(a)
 
 }

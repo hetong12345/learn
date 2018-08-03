@@ -2,7 +2,7 @@ package lintcode
 
 import "sort"
 
-func KthLargest(n int ,nums []int) int {
+func KthLargest(n int, nums []int) int {
 	sort.Ints(nums)
-	return nums[n]
+	return nums[len(nums)-n]
 }

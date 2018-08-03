@@ -4,7 +4,7 @@ import (
 	"math"
 )
 
-func UglyNumber(num int) int {//寻找第n个丑数
+func UglyNumber(num int) int { //寻找第n个丑数
 	var ugly []float64
 	var p2, p3, p5 int
 	ugly = append(ugly, 1.0)

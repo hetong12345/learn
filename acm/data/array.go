@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"log"
 )
+
 //重写动态数组
 type arr struct {
 	data []interface{}
 	size int
 }
 
-func Create(cap int) *arr {
+func CreateArray(cap int) *arr {
 	a := []interface{}{}
 	for i := 0; i < cap; i++ {
 		a = append(a, 0)
@@ -36,6 +37,13 @@ func (a *arr) Get(index int) interface{} {
 	}
 	return a.data[index]
 }
+func (a *arr) GetFirst() interface{} {
+	return a.Get(0)
+}
+
+func (a *arr) GetLast() interface{} {
+	return a.Get(a.size - 1)
+}
 func (a *arr) Set(index int, e interface{}) {
 	if index < 0 || index >= a.size {
 		panic("shu zu xiu gai chu cuo")
@@ -53,7 +61,7 @@ func (a *arr) Add(index int, e interface{}) {
 		return
 	}
 	if a.size == len(a.data) {
-		*a=(a.resize(a.size * 2))
+		*a = (a.resize(a.size * 2))
 		//fmt.Println(*a)
 	}
 	for i := a.size - 1; i >= index; i-- {
@@ -66,16 +74,16 @@ func (a *arr) Add(index int, e interface{}) {
 }
 
 func (a *arr) resize(len int) arr {
-	na := Create(len)
-	*na=na.copyArr(a)
+	na := CreateArray(len)
+	*na = na.copyArr(a)
 	*a = *na
 	return *a
 }
 func (na *arr) copyArr(a *arr) arr {
 	for i := 0; i < a.size; i++ {
-		na.data[i]= a.data[i]
+		na.data[i] = a.data[i]
 	}
-	na.size=a.size
+	na.size = a.size
 	return *na
 }
 func (a *arr) Remove(index int) interface{} {
@@ -88,9 +96,8 @@ func (a *arr) Remove(index int) interface{} {
 	}
 	a.size--
 
-	if a.size==len(a.data)/4 {
-		*a=(a.resize(len(a.data)/2))
-		//fmt.Println(*a)
+	if a.size == len(a.data)/4 {
+		*a = (a.resize(len(a.data) / 2))
 	}
 	return ret
 

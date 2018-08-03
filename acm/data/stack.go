@@ -1,42 +1,44 @@
 package data
 
-import "container/list"
+import "fmt"
 
-type Stack struct {
-	list *list.List
+type stack struct {
+	a arr
 }
 
-func NewStack() *Stack {
-	list := list.New()
-	return &Stack{list}
+func CreateStack(cap int) *stack {
+	return &stack{*CreateArray(cap)}
 }
 
-func (stack *Stack) Push(value interface{}) {
-	stack.list.PushBack(value)
+func (s *stack) GetSize() int {
+	return s.a.GetSize()
 }
 
-func (stack *Stack) Pop() interface{} {
-	e := stack.list.Back()
-	if e != nil {
-		stack.list.Remove(e)
-		return e.Value
+func (s *stack) IsEmpty() bool {
+	return s.a.IsEmpty()
+}
+
+func (s *stack) Push(e interface{}) {
+	s.a.AddLast(e)
+}
+
+func (s *stack) Pop() interface{} {
+	return s.a.RemoveLast()
+}
+
+func (s *stack) Peek() interface{} {
+	return s.a.GetLast()
+}
+func (s *stack)String()string  {
+	str := fmt.Sprint("Stack:")
+	str += fmt.Sprint(("["))
+	for i := 0; i < s.a.size; i++ {
+		str += fmt.Sprint((*s).a.data[i])
+		if i != s.a.size-1 {
+			str += fmt.Sprint(",")
+		}
 	}
-	return nil
-}
-
-func (stack *Stack) Peak() interface{} {
-	e := stack.list.Back()
-	if e != nil {
-		return e.Value
-	}
-
-	return nil
-}
-
-func (stack *Stack) Len() int {
-	return stack.list.Len()
-}
-
-func (stack *Stack) Empty() bool {
-	return stack.list.Len() == 0
+	str += fmt.Sprint("] top")
+	//fmt.Println(str)
+	return str
 }

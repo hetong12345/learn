@@ -2,24 +2,21 @@ package main
 
 import (
 	"./data"
+
 	"fmt"
 )
-
 type student struct {
 	name  string
 	score int
 }
 
 func main() {
-
-	a:=data.Create(5)
-	for i := 0; i<100;i++  {
-		a.AddLast(student{"test",i})
+	q:=data.CreateQueue(5)
+	for i:=0;i<10 ;i++  {
+		q.EnQueue(student{"fasas",i})
 	}
-	fmt.Println(a.String())
-	for i:=0;i<60 ;i++  {
-		a.RemoveLast()
-	}
-	fmt.Println(a)
+	fmt.Println(q.String())
 
+	q.DeQueue()
+	fmt.Println(q.String())
 }

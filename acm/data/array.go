@@ -11,13 +11,19 @@ type arr struct {
 	size int
 }
 
+//func CreateArray(cap int) *arr {
+//	a := []interface{}{}
+//	for i := 0; i < cap; i++ {
+//		a = append(a, 0)
+//	}
+//	return &arr{
+//		data: a,
+//		size: 0,
+//	}
+//}
 func CreateArray(cap int) *arr {
-	a := []interface{}{}
-	for i := 0; i < cap; i++ {
-		a = append(a, 0)
-	}
 	return &arr{
-		data: a,
+		data: make([]interface{},cap),
 		size: 0,
 	}
 }
@@ -60,8 +66,8 @@ func (a *arr) Add(index int, e interface{}) {
 		log.Println("fei fa weizhi ")
 		return
 	}
-	if a.size == len(a.data) {
-		*a = (a.resize(a.size * 2))
+	if a.size == len(a.data)&& len(a.data)/2 !=0{
+		*a = a.resize(a.size * 2)
 		//fmt.Println(*a)
 	}
 	for i := a.size - 1; i >= index; i-- {

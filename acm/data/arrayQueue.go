@@ -2,34 +2,37 @@ package data
 
 import "fmt"
 
-type queue struct {
+type arrayQueue struct {
 	a arr
 }
 
-func CreateQueue(cap int) *queue {
-	return &queue{*CreateArray(cap)}
+func CreateArrayQueue(cap int) *arrayQueue {
+	return &arrayQueue{*CreateArray(cap)}
 }
 
-func (q *queue) GetSize() int {
+func (q *arrayQueue) GetSize() int {
 	return q.a.GetSize()
 }
 
-func (q *queue) IsEmpty() bool {
+func (q *arrayQueue) IsEmpty() bool {
 	return q.a.IsEmpty()
 }
 
-func (q *queue) EnQueue(e interface{}) {
+func (q *arrayQueue) EnQueue(e interface{}) {
 	q.a.AddLast(e)
 }
 
-func (q *queue) DeQueue() interface{} {
+func (q *arrayQueue) DeQueue() interface{} {
 	return q.a.RemoveFirst()
 }
 
-func (q *queue) GetFront() interface{} {
+func (q *arrayQueue) GetFront() interface{} {
 	return q.a.GetFirst()
 }
-func (q *queue)String()string  {
+func (q *arrayQueue) GetCap() int {
+	return q.a.GetCap()
+}
+func (q *arrayQueue) String() string {
 	str := fmt.Sprint("Queue:")
 	str += fmt.Sprint(("front ["))
 	for i := 0; i < q.a.size; i++ {

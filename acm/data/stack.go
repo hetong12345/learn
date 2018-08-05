@@ -29,7 +29,7 @@ func (s *stack) Pop() interface{} {
 func (s *stack) Peek() interface{} {
 	return s.a.GetLast()
 }
-func (s *stack)String()string  {
+func (s *stack) String() string {
 	str := fmt.Sprint("Stack:")
 	str += fmt.Sprint(("["))
 	for i := 0; i < s.a.size; i++ {

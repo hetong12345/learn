@@ -30,7 +30,7 @@ func (q *loopQueue) DeQueue() interface{} {
 	ret := q.data[q.front]
 	q.data[q.front] = nil
 	q.front = (q.front + 1) % len(q.data)
-	fmt.Println(q.GetSize(),"`````````",q.GetCap())
+	//fmt.Println(q.GetSize(),"`````````",q.GetCap())
 	if (q.GetSize() == q.GetCap()/4) && q.GetCap()/2 != 0 {
 		*q = q.resize(q.GetCap() / 2)
 	}
@@ -45,17 +45,17 @@ func (q *loopQueue) GetFront() interface{} {
 }
 
 func (q *loopQueue) resize(newCap int) loopQueue {
-	fmt.Println("---------do resize ---------")
+	//fmt.Println("---------do resize ---------")
 	nq := CreateLoopQueue(newCap)
 	*nq = nq.copyQueue(q)
 	*q = *nq
 	return *q
 }
 func (nq *loopQueue) copyQueue(q *loopQueue) loopQueue {
-	for i := 0; i < len(q.data); i++ {
-		nq.data[i] = q.data[i]
+	for i := 0; i < q.GetSize(); i++ {
+		nq.data[i] = q.data[(i+q.front)%len(q.data)]
 	}
-	nq.front, nq.tail = q.front, q.tail
+	nq.front, nq.tail = 0, q.GetSize()
 	return *nq
 }
 
@@ -74,7 +74,7 @@ func (q *loopQueue) IsEmpty() bool {
 func (q *loopQueue) String() string {
 	str := fmt.Sprint("Queue:")
 	str += fmt.Sprint(("front ["))
-	for i := 0; i != q.tail; i = (i + 1) % len(q.data) {
+	for i := q.front; i != q.tail; i = (i + 1) % len(q.data) {
 		if q.data[i]==nil {
 			continue
 		}
@@ -84,7 +84,5 @@ func (q *loopQueue) String() string {
 		}
 	}
 	str += fmt.Sprint("] tail")
-	//fmt.Println(str)
-	fmt.Println(q.data)
 	return str
 }

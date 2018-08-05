@@ -2,24 +2,13 @@ package main
 
 import (
 	"./data"
-
 	"fmt"
 )
 
-type student struct {
-	name  string
-	score int
-}
 
 func main() {
-	q := data.CreateLoopQueue(7)
-	for i:=0;i<15 ;i++  {
-		q.EnQueue(student{"name",i})
-		fmt.Println(q.String())
-
-		if i>5 {
-			q.DeQueue()
-			fmt.Println(q.String())
-		}
-	}
+	aq:=data.CreateArrayQueue(10)
+	lq:=data.CreateLoopQueue(10)
+	fmt.Println(data.TestQueue(aq,100000))
+	fmt.Println(data.TestQueue(lq,100000))
 }

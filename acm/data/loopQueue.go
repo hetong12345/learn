@@ -2,28 +2,28 @@ package data
 
 import "fmt"
 
-type loopQueue struct {
+type LoopQueue struct {
 	data        []interface{}
 	tail, front int
 }
 
-func CreateLoopQueue(cap int) *loopQueue {
-	return &loopQueue{
+func CreateLoopQueue(cap int) *LoopQueue {
+	return &LoopQueue{
 		make([]interface{}, cap+1),
 		0,
 		0,
 	}
 }
 
-func (q *loopQueue) EnQueue(e interface{}) {
-	if (q.tail+1)%len(q.data) == q.front {
+func (q *LoopQueue) EnQueue(e interface{}) {
+	if q.IsFull() {
 		q.resize(q.GetCap() * 2)
 	}
 	q.data[q.tail] = e
 	q.tail = (q.tail + 1) % len(q.data)
 }
 
-func (q *loopQueue) DeQueue() interface{} {
+func (q *LoopQueue) DeQueue() interface{} {
 	if q.IsEmpty() {
 		fmt.Println("队列为空！", q)
 	}
@@ -37,21 +37,21 @@ func (q *loopQueue) DeQueue() interface{} {
 	return ret
 }
 
-func (q *loopQueue) GetFront() interface{} {
+func (q *LoopQueue) GetFront() interface{} {
 	if q.IsEmpty() {
-		fmt.Println("队列为空！", q)
+		fmt.Println("队列为空！")
 	}
 	return q.data[q.front]
 }
 
-func (q *loopQueue) resize(newCap int) loopQueue {
+func (q *LoopQueue) resize(newCap int) LoopQueue {
 	//fmt.Println("---------do resize ---------")
 	nq := CreateLoopQueue(newCap)
 	*nq = nq.copyQueue(q)
 	*q = *nq
 	return *q
 }
-func (nq *loopQueue) copyQueue(q *loopQueue) loopQueue {
+func (nq *LoopQueue) copyQueue(q *LoopQueue) LoopQueue {
 	for i := 0; i < q.GetSize(); i++ {
 		nq.data[i] = q.data[(i+q.front)%len(q.data)]
 	}
@@ -59,19 +59,21 @@ func (nq *loopQueue) copyQueue(q *loopQueue) loopQueue {
 	return *nq
 }
 
-func (q *loopQueue) GetCap() int {
+func (q *LoopQueue) GetCap() int {
 	return len(q.data) - 1
 }
 
-func (q *loopQueue) GetSize() int {
-	return (q.tail - q.front + q.GetCap()) % q.GetCap()
+func (q *LoopQueue) GetSize() int {
+	return (q.tail - q.front + len(q.data)) % len(q.data)
 }
 
-func (q *loopQueue) IsEmpty() bool {
+func (q *LoopQueue) IsEmpty() bool {
 	return q.front == q.tail
 }
-
-func (q *loopQueue) String() string {
+func (q *LoopQueue) IsFull() bool {
+	return (q.tail+1)%len(q.data) == q.front
+}
+func (q *LoopQueue) String() string {
 	str := fmt.Sprint("Queue:")
 	str += fmt.Sprint(("front ["))
 	for i := q.front; i != q.tail; i = (i + 1) % len(q.data) {

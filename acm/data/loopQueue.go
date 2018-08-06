@@ -77,7 +77,7 @@ func (q *LoopQueue) String() string {
 	str := fmt.Sprint("Queue:")
 	str += fmt.Sprint(("front ["))
 	for i := q.front; i != q.tail; i = (i + 1) % len(q.data) {
-		if q.data[i]==nil {
+		if q.data[i] == nil {
 			continue
 		}
 		str += fmt.Sprint((*q).data[i])

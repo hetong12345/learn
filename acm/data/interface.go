@@ -11,8 +11,17 @@ type Queue interface {
 }
 type List interface {
 	//DeQueue() interface{}
-
+	AddHead(e interface{})
 	GetSize() int
 	IsEmpty() bool
+	String() string
+}
+
+type Stack interface {
+	GetSize() int
+	IsEmpty() bool
+	Push(e interface{})
+	Pop() interface{}
+	Peek() interface{}
 	String() string
 }

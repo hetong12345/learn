@@ -23,7 +23,7 @@ type arr struct {
 //}
 func CreateArray(cap int) *arr {
 	return &arr{
-		data: make([]interface{},cap),
+		data: make([]interface{}, cap),
 		size: 0,
 	}
 }
@@ -66,7 +66,7 @@ func (a *arr) Add(index int, e interface{}) {
 		log.Println("fei fa weizhi ")
 		return
 	}
-	if a.size == len(a.data)&& len(a.data)/2 !=0{
+	if a.size == len(a.data) && len(a.data)/2 != 0 {
 		*a = a.resize(a.size * 2)
 		//fmt.Println(*a)
 	}

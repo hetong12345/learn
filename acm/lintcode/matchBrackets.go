@@ -4,8 +4,8 @@ import (
 	"../data"
 )
 
-func IsValidParentheses(s string) bool {
-	stack := data.CreateStack(5)
+func IsValidParentheses(s string) bool {//用栈实现括号匹配
+	stack := data.CreateArrayStack(5)
 	for _, v := range s {
 		if string(v) == "{" || string(v) == "[" || string(v) == "(" {
 			stack.Push(string(v))

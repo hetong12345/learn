@@ -41,7 +41,7 @@ func WriteC(s map[int]string) ServerOption {
 func main() {
 	opt1 := WriteA(int64(1))
 	opt2 := WriteB("test")
-	opt3 := WriteC(make(map[int]string,0))
+	opt3 := WriteC(make(map[int]string, 0))
 
 	op := NewOption(opt1, opt2, opt3)
 

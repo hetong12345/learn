@@ -9,3 +9,10 @@ type Queue interface {
 	IsEmpty() bool
 	String() string
 }
+type List interface {
+	//DeQueue() interface{}
+
+	GetSize() int
+	IsEmpty() bool
+	String() string
+}

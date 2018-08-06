@@ -5,14 +5,20 @@ import (
 	"fmt"
 )
 
-//type student struct {
-//	name  string
-//	score int
-//}
+type student struct {
+	name  string
+	score int
+}
 func main() {
-	aq:=data.CreateArrayQueue(10)
-	lq:=data.CreateLoopQueue(10)
-	fmt.Println(data.TestQueue(aq,100000))
-	fmt.Println(data.TestQueue(lq,100000))
-
+	nl:=data.CreateList()
+	for i:=0;i<3 ;i++  {
+		nl.AddHead(student{
+			name:"asd",
+			score:i,
+		})
+	}
+	//for i:=0;i<20 ;i++  {
+	//	fmt.Println(nl)
+	//}
+	fmt.Println(nl.String())
 }

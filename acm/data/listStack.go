@@ -3,11 +3,11 @@ package data
 import "fmt"
 
 type ListStack struct {
-	nl nodeList
+	nl *NodeList
 }
 
 func CreateListStack() *ListStack {
-	return &ListStack{*CreateNodeList()}
+	return &ListStack{CreateNodeList()}
 }
 func (ls *ListStack) GetSize() int {
 	return ls.nl.GetSize()

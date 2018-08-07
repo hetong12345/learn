@@ -3,11 +3,11 @@ package data
 import "fmt"
 
 type ArrayStack struct {
-	a arr
+	a *arr
 }
 
 func CreateArrayStack(cap int) *ArrayStack {
-	return &ArrayStack{*CreateArray(cap)}
+	return &ArrayStack{CreateArray(cap)}
 }
 
 func (as *ArrayStack) GetSize() int {

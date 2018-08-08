@@ -57,6 +57,15 @@ func (nl *NodeList) AddIndex(index int, e interface{}) {
 	prev.next = &newNode
 	nl.size++
 }
+//func (nl *NodeList) AddIndex(index int, e interface{}) {
+//	if index < 0 || index > nl.size {
+//		panic("fei fa wei zhi")
+//	}
+//	if index==0 {
+//		//插入
+//	}
+//	nl.AddIndex(index-1,e)//递归
+//}
 func (nl *NodeList) Get(index int) interface{} {
 	if index < 0 || index > nl.size {
 		panic("fei fa wei zhi")

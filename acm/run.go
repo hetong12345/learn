@@ -1,7 +1,6 @@
 package main
 
 import (
-	"./data"
 	"./lintcode"
 	"fmt"
 )
@@ -13,26 +12,40 @@ type student struct {
 
 
 func main() {
-	//ls := data.CreateListStack()
-	//as:=data.CreateArrayStack(10)
-	//
-	op := 100000
-
-	listq := data.CreateListQueue()
-	loopq := data.CreateLoopQueue(10)
-	aq := data.CreateArrayQueue(10)
-
-	fmt.Println(data.TestQueue(listq, op))
-	fmt.Println(data.TestQueue(loopq, op))
-	fmt.Println(data.TestQueue(aq, op))
 
 	head:=lintcode.ListNode{
 		1,
 		&lintcode.ListNode{
 			2,
-			&lintcode.ListNode{},
+			&lintcode.ListNode{
+				6,
+				&lintcode.ListNode{
+					3,
+					&lintcode.ListNode{
+						4,
+						&lintcode.ListNode{
+							5,
+							&lintcode.ListNode{
+								6,
+								&lintcode.ListNode{
+									2,
+									&lintcode.ListNode{
+										1,
+										&lintcode.ListNode{},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 	}
-	lintcode.RemoveElements(&head,4)
+	head=*lintcode.RemoveElements(&head,6)
+	fmt.Println(head.Val)
+	fmt.Println(head.Next.Val)
+	fmt.Println(head.Next.Next.Val)
+	fmt.Println(head.Next.Next.Next.Val)
+	fmt.Println(head.Next.Next.Next.Next.Val)
 }
 

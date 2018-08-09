@@ -74,7 +74,7 @@ func testThis()  {
 			},
 		},
 	}
-	head=*lintcode.RemoveElements2(&head,6)
+	head=*RemoveElements2(&head,6)
 	fmt.Println(head.Val)
 	fmt.Println(head.Next.Val)
 	fmt.Println(head.Next.Next.Val)

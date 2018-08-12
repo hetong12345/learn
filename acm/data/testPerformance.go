@@ -5,15 +5,10 @@ import (
 	"time"
 )
 
-type student struct {
-	name  string
-	score int
-}
-
 func TestQueue(q Queue, op int) time.Duration {
 	startTime := time.Now()
 	for i := 0; i < op; i++ {
-		q.EnQueue(student{"test", rand.Intn(10000)})
+		q.EnQueue(Student{"test", rand.Intn(10000)})
 	}
 	for i := 0; i < op-1; i++ {
 		q.DeQueue()
@@ -24,7 +19,7 @@ func TestQueue(q Queue, op int) time.Duration {
 func TestStack(s Stack, op int) time.Duration {
 	startTime := time.Now()
 	for i := 0; i < op; i++ {
-		s.Push(student{"test", rand.Intn(10000)})
+		s.Push(Student{"test", rand.Intn(10000)})
 	}
 	for i := 0; i < op-1; i++ {
 		s.Pop()

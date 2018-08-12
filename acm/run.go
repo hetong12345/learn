@@ -1,5 +1,10 @@
 package main
 
+import (
+	"./data"
+	"fmt"
+)
+
 type student struct {
 	name  string
 	score int
@@ -12,13 +17,16 @@ type person struct {
 }
 
 func main() {
-	p := person{name: "zzy", age: 100}
-	p.isDead=false
-	//isDead(p)
-}
-
-func isDead(p interface{}) {
-	if p.(person).age < 101 {
-		p.(person).isDead = true
+	bst := data.CreateBinarySearchTree()
+	nums := []int{5, 365, 13, 2, 65, 73, 66, 22, 77, 99}
+	for _, value := range nums {
+		bst.Add(&data.Student{
+			Name:  "asd",
+			Score: value,
+		})
 	}
+
+	fmt.Println(bst.Min())
+	fmt.Println(bst.Max())
+	//fmt.Println(bst.String())
 }

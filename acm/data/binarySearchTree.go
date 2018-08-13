@@ -31,7 +31,6 @@ func (bst *BinarySearchTree) Add(value Comparable) {
 	bst.root = add(bst.root, value)
 	bst.size++
 }
-
 func add(node *treeNode, value Comparable) *treeNode {
 	if node == nil {
 		return &treeNode{value, nil, nil}
@@ -121,15 +120,21 @@ func min(node *treeNode) *treeNode {
 	return min(node.left)
 }
 
-func (bst *BinarySearchTree) RemoveMin() Comparable { //todo 完成删除最大最小的递归操作
+func (bst *BinarySearchTree) RemoveMin() Comparable {
 	ret := min(bst.root)
-	//right:=ret.right
-	//removeMin(ret)
-	return nil
+	bst.root=removeMin(bst.root)
+	bst.size--
+	return ret.value
 }
-func removeMin(node *treeNode) Comparable {
-	//if
-	return nil
+func removeMin(node *treeNode) *treeNode {
+	if node.left==nil {
+		right:=node.right
+		node.right=nil
+		return right
+	}
+
+	node.left=removeMin(node.left)
+	return node
 }
 func (bst *BinarySearchTree) Max() Comparable { //找出最大值
 	if bst.size == 0 {
@@ -144,9 +149,22 @@ func max(node *treeNode) *treeNode {
 	return max(node.right)
 }
 func (bst *BinarySearchTree) RemoveMax() Comparable {
-	ret := bst.Max()
-	return ret
+	ret := max(bst.root)
+	bst.root=removeMax(bst.root)
+	bst.size--
+	return ret.value
 }
+func removeMax(node *treeNode) *treeNode {
+	if node.right==nil {
+		left:=node.left
+		node.right=nil
+		return left
+	}
+
+	node.right=removeMax(node.right)
+	return node
+}
+
 func (bst *BinarySearchTree) String() string {
 	str := ""
 	return createString(bst.root, 0, str)

@@ -3,6 +3,7 @@ package main
 import (
 	"./data"
 	"fmt"
+	"math/rand"
 )
 
 type student struct {
@@ -15,18 +16,26 @@ type person struct {
 	age    byte
 	isDead bool
 }
-
 func main() {
 	bst := data.CreateBinarySearchTree()
-	nums := []int{5, 365, 13, 2, 65, 73, 66, 22, 77, 99}
-	for _, value := range nums {
+	n:=1000
+	for i := 0; i<n; i++ {
 		bst.Add(&data.Student{
-			Name:  "asd",
-			Score: value,
+			Name:"asd",
+			Score:rand.Intn(10000),
 		})
 	}
+	al:=data.CreateArray(1000)
+	for !bst.IsEmpty() {
+		al.AddLast(bst.RemoveMin())
+	}
+	fmt.Println(al.String())
+}
 
-	fmt.Println(bst.Min())
-	fmt.Println(bst.Max())
-	//fmt.Println(bst.String())
+func cal()  {
+	fmt.Println(.1 + .2)
+	var a float64 = .1
+	var b float64 = .2
+	fmt.Println(a + b)
+	fmt.Printf("%.54f\n", .1 + .2)
 }

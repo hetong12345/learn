@@ -19,7 +19,6 @@ func (g intGen) Read(p []byte) (n int, err error) {
 	return strings.NewReader(s).Read(p)
 }
 
-//TODO
 
 func main() {
 	f := fibnacci()

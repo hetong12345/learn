@@ -1,6 +1,8 @@
 package data
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type BinarySearchTree struct {
 	root *treeNode
@@ -28,18 +30,18 @@ func (bst *BinarySearchTree) IsEmpty() bool {
 }
 
 func (bst *BinarySearchTree) Add(value Comparable) {
-	bst.root = add(bst.root, value)
-	bst.size++
+	bst.root = bst.add(bst.root, value)
 }
-func add(node *treeNode, value Comparable) *treeNode {
+func (bst *BinarySearchTree)add(node *treeNode, value Comparable) *treeNode {
 	if node == nil {
+		bst.size++
 		return &treeNode{value, nil, nil}
 	}
 
 	if value.CompareTo(node.value) < 0 {
-		node.left = add(node.left, value)
+		node.left = bst.add(node.left, value)
 	} else if value.CompareTo(node.value) > 0 {
-		node.right = add(node.right, value)
+		node.right = bst.add(node.right, value)
 	}
 	return node
 }

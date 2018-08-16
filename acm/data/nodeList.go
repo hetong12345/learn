@@ -162,16 +162,16 @@ func (nl *NodeList) Remove(index int) interface{} {
 		panic("fei fa wei zhi")
 	}
 	nl.size--
-	return remove(nl.dummyHead, index)
+	return removeNode(nl.dummyHead, index)
 }
-func remove(prev *node, index int) interface{} {
+func removeNode(prev *node, index int) interface{} {
 	if index == 0 {
 		ret := prev.next
 		prev.next = ret.next
 		ret.next = nil
 		return ret.value
 	}
-	return remove(prev.next, index-1)
+	return removeNode(prev.next, index-1)
 }
 func (nl *NodeList) RemoveFirst() interface{} {
 	return nl.Remove(0)

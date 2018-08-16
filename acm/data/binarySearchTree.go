@@ -32,7 +32,7 @@ func (bst *BinarySearchTree) IsEmpty() bool {
 func (bst *BinarySearchTree) Add(value Comparable) {
 	bst.root = bst.add(bst.root, value)
 }
-func (bst *BinarySearchTree)add(node *treeNode, value Comparable) *treeNode {
+func (bst *BinarySearchTree) add(node *treeNode, value Comparable) *treeNode {
 	if node == nil {
 		bst.size++
 		return &treeNode{value, nil, nil}
@@ -124,18 +124,18 @@ func min(node *treeNode) *treeNode {
 
 func (bst *BinarySearchTree) RemoveMin() Comparable {
 	ret := min(bst.root)
-	bst.root=removeMin(bst.root)
+	bst.root = removeMin(bst.root)
 	bst.size--
 	return ret.value
 }
 func removeMin(node *treeNode) *treeNode {
-	if node.left==nil {
-		right:=node.right
-		node.right=nil
+	if node.left == nil {
+		right := node.right
+		node.right = nil
 		return right
 	}
 
-	node.left=removeMin(node.left)
+	node.left = removeMin(node.left)
 	return node
 }
 func (bst *BinarySearchTree) Max() Comparable { //找出最大值
@@ -152,21 +152,56 @@ func max(node *treeNode) *treeNode {
 }
 func (bst *BinarySearchTree) RemoveMax() Comparable {
 	ret := max(bst.root)
-	bst.root=removeMax(bst.root)
+	bst.root = removeMax(bst.root)
 	bst.size--
 	return ret.value
 }
 func removeMax(node *treeNode) *treeNode {
-	if node.right==nil {
-		left:=node.left
-		node.right=nil
+	if node.right == nil {
+		left := node.left
+		node.right = nil
 		return left
 	}
 
-	node.right=removeMax(node.right)
+	node.right = removeMax(node.right)
 	return node
 }
 
+func (bst *BinarySearchTree) Remove(value Comparable) {
+	bst.root = bst.remove(bst.root, value)
+}
+func (bst *BinarySearchTree) remove(node *treeNode, value Comparable) *treeNode {
+	if node == nil {
+		return nil
+	}
+	if value.CompareTo(node.value) < 0 {
+		node.left = bst.remove(node.left, value)
+		return node
+	} else if value.CompareTo(node.value) > 0 {
+		node.right = bst.remove(node.right, value)
+		return node
+	} else {
+		if node.left == nil {
+			right := node.right
+			node.right = nil
+			bst.size--
+			return right
+		} else if node.right == nil {
+			left := node.left
+			node.left = nil
+			bst.size--
+			return left
+		}
+
+		ret := min(node.right)
+		ret.right = removeMin(node.right)
+		ret.left = node.left
+		node.left, node.right = nil, nil
+		return ret
+
+	}
+
+}
 func (bst *BinarySearchTree) String() string {
 	str := ""
 	return createString(bst.root, 0, str)

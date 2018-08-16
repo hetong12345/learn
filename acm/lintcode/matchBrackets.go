@@ -1,7 +1,7 @@
 package lintcode
 
 import (
-	"../data"
+	"github.com/hetong12345/learn/acm/data"
 )
 
 func IsValidParentheses(s string) bool { //用栈实现括号匹配

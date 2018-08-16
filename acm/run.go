@@ -36,7 +36,9 @@ func main() {
 	ad:=IPAddr{127, 0, 0, 1}
 	//fmt.Println(ad[0]+"."+ad[1]+"."+ad[2]+".")
 	fmt.Print(ad.String())
+
 }
+
 type IPAddr [4]byte
 func (ad *IPAddr)String() string {
 	fmt.Println(string(ad[0]))

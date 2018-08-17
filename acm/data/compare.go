@@ -4,10 +4,9 @@ type Student struct {
 	Name  string
 	Score int
 }
-type TwoStudent [2]Student
 
-func (p *TwoStudent) Compare() int {
-	return p[0].Score - p[1].Score
+func (p *Student) Compare(c2 Comparable) int {
+	return p.Score - c2.(*Student).Score
 }
 
 //func Compare(var1,var2 Comparable) int {
@@ -17,12 +16,8 @@ func (p *TwoStudent) Compare() int {
 //	return Sub(var1,var2)
 //}
 
-type Integer [2]int
+type Integer int
 
-func (i *Integer) Compare() int {
-	return i[0] - i[1]
-}
-
-func Ints(i, j int) int {
-	return i - j
+func (i Integer) Compare(c2 Comparable) int {
+	return int(i) - int(c2.(Integer))
 }

@@ -40,7 +40,7 @@ type Tree interface {
 	String() string
 }
 type Comparable interface {
-	Compare() int
+	Compare(c2 Comparable) int
 }
 
 type Set interface {

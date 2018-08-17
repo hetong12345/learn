@@ -16,18 +16,9 @@ func main() {
 	str := string(file)
 	split := strings.Split(str, " ")
 	//treeSet := data.CreateTreeSet()
-	fmt.Println(data.Ints(5, 6))
-	a := data.TwoStudent{
-		data.Student{
-			Name:  "zhang san",
-			Score: 55,
-		},
-		data.Student{
-			Name:  "renketong",
-			Score: 99,
-		},
-	}
-	fmt.Println(a.Compare())
+
+	a := data.
+		fmt.Println(a.Compare())
 	//for _, value := range split {
 	//	treeSet.Add(strings.ToLower(value))
 	//}

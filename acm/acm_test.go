@@ -61,3 +61,24 @@ func TestRemove(t *testing.T) {
 	})
 	fmt.Println(bst)
 }
+
+func TestBstInt(t *testing.T) {
+	rand.Seed(time.Now().UnixNano())
+	bst := data.CreateBinarySearchTree()
+	for i := 0; i < 1000; i++ {
+		bst.Add(data.IntComparable(rand.Intn(10000)))
+	}
+	il := data.CreateArray(1000)
+	for !bst.IsEmpty() {
+		il.AddLast(bst.RemoveMax())
+	}
+	fmt.Println(il)
+	for i := 1; i < il.GetSize(); i++ {
+		v1 := il.Get(i - 1).(data.IntComparable)
+		v2 := il.Get(i).(data.IntComparable)
+		if v1.CompareTo(v2) < 0 {
+			t.Error("大小错位")
+		}
+	}
+	t.Log("ok!")
+}

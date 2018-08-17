@@ -2,7 +2,7 @@ package lintcode
 
 import "fmt"
 
-func RemoveElements(head *ListNode, val int) *ListNode {//lintcode 452
+func RemoveElements(head *ListNode, val int) *ListNode { //lintcode 452
 	// write your code here
 
 	for head != nil && head.Val == val {
@@ -31,22 +31,22 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func RemoveElements2(head *ListNode, val int)   *ListNode{//lintcode 452 使用递归解决
+func RemoveElements2(head *ListNode, val int) *ListNode { //lintcode 452 使用递归解决
 
-	if head==nil {
+	if head == nil {
 		return nil
 	}
-	res:=RemoveElements2(head.Next,val)
-	if head.Val==val {
+	res := RemoveElements2(head.Next, val)
+	if head.Val == val {
 		return res
-	}else{
-		head.Next=res
+	} else {
+		head.Next = res
 		return head
 	}
 }
 
-func testThis()  {
-	head:=ListNode{
+func testThis() {
+	head := ListNode{
 		1,
 		&ListNode{
 			2,
@@ -74,7 +74,7 @@ func testThis()  {
 			},
 		},
 	}
-	head=*RemoveElements2(&head,6)
+	head = *RemoveElements2(&head, 6)
 	fmt.Println(head.Val)
 	fmt.Println(head.Next.Val)
 	fmt.Println(head.Next.Next.Val)

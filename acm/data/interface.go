@@ -32,9 +32,22 @@ type Tree interface {
 	//树
 	GetSize() int
 	IsEmpty() bool
-	Add(Comparable)
-	Contains(Comparable) bool
+	Add(value Comparable)
+	Remove(value Comparable)
+	Contains(value Comparable) bool
+	Min() Comparable
+	Max() Comparable
+	String() string
 }
 type Comparable interface {
-	CompareTo(var2 Comparable) int
+	Compare() int
+}
+
+type Set interface {
+	//栈
+	GetSize() int
+	IsEmpty() bool
+	Add(value Comparable)
+	Remove(value Comparable)
+	Contains(value Comparable) bool
 }

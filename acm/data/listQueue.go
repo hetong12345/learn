@@ -35,7 +35,7 @@ func (lq *ListQueue) IsEmpty() bool {
 func (lq *ListQueue) String() string {
 	str := fmt.Sprint("Queue:")
 	str += fmt.Sprint("front [")
-	head:=lq.il.head
+	head := lq.il.head
 	for {
 		str += fmt.Sprint(head.value)
 		if head.next != nil {

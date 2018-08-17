@@ -38,9 +38,9 @@ func (bst *BinarySearchTree) add(node *treeNode, value Comparable) *treeNode {
 		return &treeNode{value, nil, nil}
 	}
 
-	if value.CompareTo(node.value) < 0 {
+	if value.Compare() < 0 {
 		node.left = bst.add(node.left, value)
-	} else if value.CompareTo(node.value) > 0 {
+	} else if value.Compare() > 0 {
 		node.right = bst.add(node.right, value)
 	}
 	return node
@@ -54,7 +54,7 @@ func contains(node *treeNode, value Comparable) bool {
 	} else if node.value == value {
 		return true
 	}
-	if value.CompareTo(node.value) < 0 {
+	if value.Compare() < 0 {
 		return contains(node.left, value)
 	} else {
 		return contains(node.right, value)
@@ -174,10 +174,10 @@ func (bst *BinarySearchTree) remove(node *treeNode, value Comparable) *treeNode 
 	if node == nil {
 		return nil
 	}
-	if value.CompareTo(node.value) < 0 {
+	if value.Compare() < 0 {
 		node.left = bst.remove(node.left, value)
 		return node
-	} else if value.CompareTo(node.value) > 0 {
+	} else if value.Compare() > 0 {
 		node.right = bst.remove(node.right, value)
 		return node
 	} else {
@@ -208,16 +208,16 @@ func (bst *BinarySearchTree) String() string {
 }
 func createString(node *treeNode, depth int, str string) string {
 	if node == nil {
-		str += deepthString(depth) + "nil \n"
+		str += DepthString(depth) + "nil \n"
 		return str
 	}
 
-	str += deepthString(depth) + fmt.Sprint(node.value) + "\n"
+	str += DepthString(depth) + fmt.Sprint(node.value) + "\n"
 	str = createString(node.left, depth+1, str)
 	str = createString(node.right, depth+1, str)
 	return str
 }
-func deepthString(depth int) string {
+func DepthString(depth int) string {
 	str := fmt.Sprint("")
 	for i := 0; i < depth; i++ {
 		str += fmt.Sprint("--")

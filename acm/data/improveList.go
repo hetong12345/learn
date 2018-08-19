@@ -66,6 +66,16 @@ func (il *ImproveList) IsEmpty() bool {
 	return il.size == 0
 }
 
+func (il *ImproveList) Contains(e interface{}) bool {
+	current := il.head
+	for current != nil {
+		if current.value == e {
+			return true //递归实现
+		}
+		current = current.next
+	}
+	return false
+}
 func (il *ImproveList) String() string {
 	if il.IsEmpty() {
 		return fmt.Sprint("List: nil")

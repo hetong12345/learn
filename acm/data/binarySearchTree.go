@@ -38,9 +38,9 @@ func (bst *BinarySearchTree) add(node *treeNode, value Comparable) *treeNode {
 		return &treeNode{value, nil, nil}
 	}
 
-	if value.Compare() < 0 {
+	if value.Compare(node.value) < 0 {
 		node.left = bst.add(node.left, value)
-	} else if value.Compare() > 0 {
+	} else if value.Compare(node.value) > 0 {
 		node.right = bst.add(node.right, value)
 	}
 	return node
@@ -54,7 +54,7 @@ func contains(node *treeNode, value Comparable) bool {
 	} else if node.value == value {
 		return true
 	}
-	if value.Compare() < 0 {
+	if value.Compare(node.value) < 0 {
 		return contains(node.left, value)
 	} else {
 		return contains(node.right, value)
@@ -174,10 +174,10 @@ func (bst *BinarySearchTree) remove(node *treeNode, value Comparable) *treeNode 
 	if node == nil {
 		return nil
 	}
-	if value.Compare() < 0 {
+	if value.Compare(node.value) < 0 {
 		node.left = bst.remove(node.left, value)
 		return node
-	} else if value.Compare() > 0 {
+	} else if value.Compare(node.value) > 0 {
 		node.right = bst.remove(node.right, value)
 		return node
 	} else {

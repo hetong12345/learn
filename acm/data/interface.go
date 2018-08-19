@@ -15,6 +15,7 @@ type List interface {
 	AddHead(e interface{})
 	GetSize() int
 	IsEmpty() bool
+	Contains(e interface{}) bool
 	String() string
 }
 
@@ -50,4 +51,14 @@ type Set interface {
 	Add(value Comparable)
 	Remove(value Comparable)
 	Contains(value Comparable) bool
+}
+
+type Map interface {
+	Add(k interface{}, v interface{})
+	Remove(k interface{}) interface{}
+	Contains(key interface{}) bool
+	Get(key interface{}) interface{}
+	Set(key interface{}, newValue interface{})
+	GetSize() int
+	IsEmpty() bool
 }

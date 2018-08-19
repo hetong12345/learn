@@ -26,3 +26,6 @@ func (ts *TreeSet) Remove(value Comparable) {
 func (ts *TreeSet) Contains(value Comparable) bool {
 	return ts.bst.Contains(value)
 }
+func (ts *TreeSet) String() string {
+	return ts.bst.String()
+}

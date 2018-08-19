@@ -24,7 +24,7 @@ func TestBst(t *testing.T) {
 	for i := 1; i < il.GetSize(); i++ {
 		v1 := il.Get(i - 1).(*data.Student)
 		v2 := il.Get(i).(*data.Student)
-		if v1.CompareTo(v2) < 0 {
+		if v1.Compare(v2) < 0 {
 			t.Error("大小错位")
 		}
 	}
@@ -66,7 +66,7 @@ func TestBstInt(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	bst := data.CreateBinarySearchTree()
 	for i := 0; i < 1000; i++ {
-		bst.Add(data.IntComparable(rand.Intn(10000)))
+		bst.Add(data.Integer(rand.Intn(10000)))
 	}
 	il := data.CreateArray(1000)
 	for !bst.IsEmpty() {
@@ -74,9 +74,9 @@ func TestBstInt(t *testing.T) {
 	}
 	fmt.Println(il)
 	for i := 1; i < il.GetSize(); i++ {
-		v1 := il.Get(i - 1).(data.IntComparable)
-		v2 := il.Get(i).(data.IntComparable)
-		if v1.CompareTo(v2) < 0 {
+		v1 := il.Get(i - 1).(data.Integer)
+		v2 := il.Get(i).(data.Integer)
+		if v1.Compare(v2) < 0 {
 			t.Error("大小错位")
 		}
 	}

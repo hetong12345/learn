@@ -1,5 +1,7 @@
 package data
 
+import "sort"
+
 type Student struct {
 	Name  string
 	Score int
@@ -20,4 +22,16 @@ type Integer int
 
 func (i Integer) Compare(c2 Comparable) int {
 	return int(i) - int(c2.(Integer))
+}
+
+type Stringer string
+
+func (s Stringer) Compare(s2 Comparable) int {
+	if s == s2 {
+		return 0
+	}
+	if sort.StringsAreSorted([]string{string(s), string(s2.(Stringer))}) {
+		return -1
+	}
+	return 1
 }

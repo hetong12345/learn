@@ -51,6 +51,7 @@ type Set interface {
 	Add(value Comparable)
 	Remove(value Comparable)
 	Contains(value Comparable) bool
+	String() string
 }
 
 type Map interface {
@@ -61,4 +62,5 @@ type Map interface {
 	Set(key interface{}, newValue interface{})
 	GetSize() int
 	IsEmpty() bool
+	String() string
 }

@@ -139,15 +139,15 @@ func ratioString(vals ...int) string {
 	return s
 }
 
-func main() {
-	strategies := make([]strategy, win)
-	for k := range strategies {
-		strategies[k] = stayAtK(k + 1)
-	}
-	wins, games := roundRobin(strategies)
-
-	for k := range strategies {
-		fmt.Printf("Wins, losses staying at k =% 4d: %s\n",
-			k+1, ratioString(wins[k], games-wins[k]))
-	}
-}
+//func main() {
+//	strategies := make([]strategy, win)
+//	for k := range strategies {
+//		strategies[k] = stayAtK(k + 1)
+//	}
+//	wins, games := roundRobin(strategies)
+//
+//	for k := range strategies {
+//		fmt.Printf("Wins, losses staying at k =% 4d: %s\n",
+//			k+1, ratioString(wins[k], games-wins[k]))
+//	}
+//}

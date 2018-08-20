@@ -1,5 +1,7 @@
 package data
 
+import "fmt"
+
 type ListMap struct {
 	dummyHead *mapNode
 	size      int
@@ -25,7 +27,7 @@ func CreateListMap() *ListMap {
 func (lm *ListMap) getMapNode(key interface{}) *mapNode {
 	cur := lm.dummyHead.next
 	for cur != nil {
-		if cur.value == key {
+		if cur.key == key {
 			return cur
 		}
 		cur = cur.next
@@ -92,4 +94,20 @@ func (lm *ListMap) GetSize() int {
 
 func (lm *ListMap) IsEmpty() bool {
 	return lm.size == 0
+}
+func (lm *ListMap) String() string {
+	str := fmt.Sprint("List:")
+	str += fmt.Sprint("Head ")
+	current := lm.dummyHead.next
+	for {
+		str += fmt.Sprint(current.value)
+		if current.next != nil {
+			str += fmt.Sprint("->")
+			current = current.next
+		} else {
+			break
+		}
+	}
+	str += fmt.Sprint("->nil")
+	return str
 }

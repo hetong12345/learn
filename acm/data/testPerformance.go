@@ -34,15 +34,14 @@ func TestStack(s Stack, op int) time.Duration {
 func TestSet(s Set) time.Duration {
 	startTime := time.Now()
 
-	file, err := ioutil.ReadFile("./acm/pride-and-prejudice.txt")
-	if err != nil {
-		fmt.Errorf("读文件错误", err)
-	}
-	str := string(file)
-	split := strings.Split(str, " ")
-	fmt.Println(len(split))
+	file := "./acm/pride-and-prejudice.txt"
+	//file := "./acm/测试文本"
 
-	for _, value := range split {
+	word := divideWord(file)
+	fmt.Println(len(word))
+
+	for _, value := range word {
+
 		ls := strings.ToLower(value)
 
 		s.Add(Stringer(ls))
@@ -51,18 +50,17 @@ func TestSet(s Set) time.Duration {
 
 	return time.Since(startTime)
 }
+
 func TestMap(m Map) time.Duration {
 	startTime := time.Now()
 
-	file, err := ioutil.ReadFile("./acm/pride-and-prejudice.txt")
-	if err != nil {
-		fmt.Errorf("读文件错误", err)
-	}
-	str := string(file)
-	split := strings.Split(str, " ")
-	fmt.Println(len(split))
+	file := "./acm/pride-and-prejudice.txt"
+	//file := "./acm/测试文本"
 
-	for _, value := range split {
+	word := divideWord(file)
+	fmt.Println(len(word))
+
+	for _, value := range word {
 		ls := strings.ToLower(value)
 		num := m.Get(ls)
 		if num == nil {
@@ -75,4 +73,31 @@ func TestMap(m Map) time.Duration {
 	fmt.Println(m.GetSize())
 
 	return time.Since(startTime)
+}
+func divideWord(path string) []string {
+	var wordMap []string
+	file, err := ioutil.ReadFile(path)
+	if err != nil {
+		fmt.Errorf("读文件错误", err)
+	}
+	text := string(file)
+	//按字母读取，除26个字母（大小写）之外的所有字符均认为是分隔符
+	var size = 0
+	letterStart := false
+	var str = ""
+	for _, value := range text {
+		if (value >= 65 && value <= 90) || (value >= 97 && value <= 122) {
+			letterStart = true
+			str += fmt.Sprintf("%c", value)
+		} else {
+			if letterStart {
+				size++
+				letterStart = false
+				wordMap = append(wordMap, str)
+				//fmt.Println(str,wordMap)
+				str = ""
+			}
+		}
+	}
+	return wordMap
 }

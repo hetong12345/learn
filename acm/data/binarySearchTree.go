@@ -208,16 +208,16 @@ func (bst *BinarySearchTree) String() string {
 }
 func createString(node *treeNode, depth int, str string) string {
 	if node == nil {
-		str += DepthString(depth) + "nil \n"
+		str += depthString(depth) + "nil \n"
 		return str
 	}
 
-	str += DepthString(depth) + fmt.Sprint(node.value) + "\n"
+	str += depthString(depth) + fmt.Sprint(node.value) + "\n"
 	str = createString(node.left, depth+1, str)
 	str = createString(node.right, depth+1, str)
 	return str
 }
-func DepthString(depth int) string {
+func depthString(depth int) string {
 	str := fmt.Sprint("")
 	for i := 0; i < depth; i++ {
 		str += fmt.Sprint("--")

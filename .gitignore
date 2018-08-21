@@ -99,3 +99,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+将删除 .idea/dbnavigator.xml
+将删除 .idea/workspace.xml

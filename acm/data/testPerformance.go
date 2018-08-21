@@ -62,15 +62,18 @@ func TestMap(m Map) time.Duration {
 
 	for _, value := range word {
 		ls := strings.ToLower(value)
-		num := m.Get(ls)
+		s := Stringer(ls)
+		num := m.Get(s)
 		if num == nil {
-			m.Add(ls, 1)
+			m.Add(s, 1)
 		} else {
-			m.Set(ls, num.(int)+1)
+			m.Set(s, num.(int)+1)
 		}
-
 	}
 	fmt.Println(m.GetSize())
+	fmt.Println(m.Get(Stringer("the")))
+	fmt.Println(m.Get(Stringer("pride")))
+	fmt.Println(m.Get(Stringer("prejudice")))
 
 	return time.Since(startTime)
 }

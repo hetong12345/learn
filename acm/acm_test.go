@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/hetong12345/learn/acm/data"
+	"math"
 	"math/rand"
 	"testing"
 	"time"
@@ -81,4 +82,21 @@ func TestBstInt(t *testing.T) {
 		}
 	}
 	t.Log("ok!")
+}
+
+func TestHeap(t *testing.T) {
+	rand.Seed(time.Now().UnixNano())
+	var a []data.Comparable
+	for i := 0; i < 1000000; i++ {
+		a = append(a, data.Integer(rand.Intn(math.MaxInt16)))
+	}
+	now1 := time.Now()
+	maxHeap := data.CreateMaxHeap()
+	for _, value := range a {
+		maxHeap.Add(value)
+	}
+	fmt.Println(time.Since(now1).String())
+	now2 := time.Now()
+	_ = data.Heapify(a)
+	fmt.Println(time.Since(now2).String())
 }

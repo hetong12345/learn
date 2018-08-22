@@ -1,33 +1,40 @@
 package data
 
 type PriorityQueue struct {
+	mh *MaxHeap
 }
 
 func CreatePriorityQueue() *PriorityQueue {
 
-	return nil
+	return &PriorityQueue{
+		CreateMaxHeap(),
+	}
 }
 
-func (*PriorityQueue) DeQueue() interface{} {
-	panic("implement me")
+func (pq *PriorityQueue) DeQueue() interface{} {
+	return pq.mh.Remove()
 }
 
-func (*PriorityQueue) EnQueue(e interface{}) {
-	panic("implement me")
+func (pq *PriorityQueue) EnQueue(e interface{}) {
+	ce, ok := e.(Comparable)
+	if !ok {
+		panic("e is no a comparable ver")
+	}
+	pq.mh.Add(ce)
 }
 
-func (*PriorityQueue) GetFront() interface{} {
-	panic("implement me")
+func (pq *PriorityQueue) GetFront() interface{} {
+	return pq.mh.getMax()
 }
 
-func (*PriorityQueue) GetSize() int {
-	panic("implement me")
+func (pq *PriorityQueue) GetSize() int {
+	return pq.mh.GetSize()
 }
 
-func (*PriorityQueue) IsEmpty() bool {
-	panic("implement me")
+func (pq *PriorityQueue) IsEmpty() bool {
+	return pq.mh.IsEmpty()
 }
 
-func (*PriorityQueue) String() string {
-	panic("implement me")
+func (pq *PriorityQueue) String() string {
+	return pq.mh.String()
 }

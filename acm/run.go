@@ -10,6 +10,7 @@ func main() {
 	//treeMap := data.CreateTreeMap()
 	//listSet := data.CreateListSet()
 	//treeSet := data.CreateTreeSet()
+
 	maxHeap := data.CreateMaxHeap()
 	fmt.Println(data.TestHeap(maxHeap, 1000000))
 
@@ -17,9 +18,14 @@ func main() {
 	//fmt.Println(data.TestMap(treeMap).String())
 	//fmt.Println(data.TestSet(listSet).String())
 	//fmt.Println(data.TestSet(treeSet).String())
-
+	s := "asddsa"
+	qqq(s)
 }
 
-func qqq(a ...string) {
+func qqq(a interface{}) {
+	c, ok := a.(int)
+	if ok {
+		fmt.Println(c)
+	}
 	fmt.Println(a)
 }

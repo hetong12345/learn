@@ -40,7 +40,7 @@ func (mh *MaxHeap) shiftUp(index int) {
 }
 
 func (mh *MaxHeap) Remove() Comparable {
-	ret := mh.array[0]
+	ret := mh.getMax()
 	mh.array[0], mh.array[mh.GetSize()-1] = mh.array[mh.GetSize()-1], mh.array[0]
 	mh.array = mh.array[0 : len(mh.array)-1]
 	mh.shiftDown(0)
@@ -61,6 +61,21 @@ func (mh *MaxHeap) shiftDown(index int) {
 		index = max
 	}
 }
+func (mh *MaxHeap) Replace(newEle Comparable) Comparable {
+	ret := mh.array[0]
+	mh.array[0] = newEle
+	mh.shiftDown(0)
+	return ret
+}
+func Heapify(arr []Comparable) *MaxHeap {
+	ret := &MaxHeap{
+		array: arr,
+	}
+	for i := ret.parent(len(arr) - 1); i >= 0; i-- {
+		ret.shiftDown(i)
+	}
+	return ret
+}
 func (mh *MaxHeap) exist(index int) bool {
 	return index < len(mh.array)
 }
@@ -74,4 +89,10 @@ func (mh *MaxHeap) IsEmpty() bool {
 
 func (mh *MaxHeap) String() string {
 	return fmt.Sprint(mh.array)
+}
+func (mh *MaxHeap) getMax() Comparable {
+	if mh.IsEmpty() {
+		panic("heap is empty")
+	}
+	return mh.array[0]
 }

@@ -104,3 +104,25 @@ func divideWord(path string) []string {
 	}
 	return wordMap
 }
+func TestHeap(h Heap, op int) time.Duration {
+	startTime := time.Now()
+	rand.Seed(time.Now().Unix())
+	//t:=[]int{78 ,73 ,47 ,72 ,47 ,39 ,27 ,69 ,62 ,46 ,3, 7, 31 ,8 ,4 ,33 ,37 ,18, 2, 44}
+	for i := 0; i < op; i++ {
+		h.Add(Integer(rand.Intn(10000)))
+	}
+	//for _, value := range t {
+	//	h.Add(Integer(value))
+	//}
+	var r []int
+	for i := 0; i < op; i++ {
+		n := int(h.Remove().(Integer))
+		r = append(r, n)
+	}
+	for i := 1; i < op; i++ {
+		if r[i-1] < r[i] {
+			panic("err")
+		}
+	}
+	return time.Since(startTime)
+}

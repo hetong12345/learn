@@ -64,3 +64,16 @@ type Map interface {
 	IsEmpty() bool
 	String() string
 }
+
+type Heap interface {
+	Add(e Comparable)
+	Remove() Comparable
+	shiftUp(index int)
+	shiftDown(index int)
+	//Contains(key interface{}) bool
+	//Get(key interface{}) interface{}
+	//Set(key interface{}, newValue interface{})
+	GetSize() int
+	IsEmpty() bool
+	String() string
+}

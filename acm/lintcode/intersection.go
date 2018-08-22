@@ -40,17 +40,11 @@ func intersection2(nums1 []int, nums2 []int) []int { //lintcode 548
 			m[value] = 1
 		}
 	}
-	fmt.Println(m)
 	for _, value := range nums2 {
-		v, ok := m[value]
-		if ok {
+		v := m[value]
+		if v > 0 {
 			m[value] = v - 1
-		}
-	}
-	fmt.Println(m)
-	for key, value := range m {
-		for i := 0; i < value; i++ {
-			ret = append(ret, key)
+			ret = append(ret, value)
 		}
 	}
 	sort.Ints(ret)

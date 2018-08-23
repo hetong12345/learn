@@ -30,7 +30,7 @@ type locationxmlInfo struct {
 	City    string `xml:"city"`
 	Isp     string `xml:"isp"`
 	Zip     string `xml:"zip"`
-	Zone    string `xml:zone`
+	Zone    string `xml:"zone"`
 }
 
 //json struct

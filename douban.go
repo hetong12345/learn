@@ -17,7 +17,7 @@ type Spider struct {
 }
 
 //定义 Spider get的方法
-func (keyword Spider) get_html_header() string {
+func (keyword Spider) getHtmlHeader() string {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", keyword.url, nil)
 	if err != nil {
@@ -60,33 +60,33 @@ func parse() {
 		fmt.Println("正在抓取第" + strconv.Itoa(i) + "页......")
 		url := "https://movie.douban.com/top250?start=" + strconv.Itoa(i*25) + "&filter="
 		spider := &Spider{url, header}
-		html := spider.get_html_header()
+		html := spider.getHtmlHeader()
 
 		//评价人数
 		pattern2 := `<span>(.*?)评价</span>`
 		rp2 := regexp.MustCompile(pattern2)
-		find_txt2 := rp2.FindAllStringSubmatch(html, -1)
+		findTxt2 := rp2.FindAllStringSubmatch(html, -1)
 
 		//评分
 		pattern3 := `property="v:average">(.*?)</span>`
 		rp3 := regexp.MustCompile(pattern3)
-		find_txt3 := rp3.FindAllStringSubmatch(html, -1)
+		findTxt3 := rp3.FindAllStringSubmatch(html, -1)
 
 		//电影名称
 		pattern4 := `img width="100" alt="(.*?)" src=`
 		rp4 := regexp.MustCompile(pattern4)
-		find_txt4 := rp4.FindAllStringSubmatch(html, -1)
+		findTxt4 := rp4.FindAllStringSubmatch(html, -1)
 
 		pattern5 := `<span class="inq">(.*?)</span>`
 		rp5 := regexp.MustCompile(pattern5)
-		find_txt5 := rp5.FindAllStringSubmatch(html, -1)
+		findTxt5 := rp5.FindAllStringSubmatch(html, -1)
 
 		// 写入UTF-8 BOM
 		f.WriteString("\xEF\xBB\xBF")
 		//  打印全部数据和写入excel文件
-		for i := 0; i < len(find_txt2); i++ {
-			fmt.Printf("%s %s %s %s\n", find_txt4[i][1], find_txt3[i][1], find_txt2[i][1], find_txt5[i][1])
-			f.WriteString(find_txt4[i][1] + "\t" + find_txt3[i][1] + "\t" + find_txt2[i][1] + "\t" + find_txt5[i][1] + "\r\n")
+		for i := 0; i < len(findTxt2); i++ {
+			fmt.Printf("%s %s %s %s\n", findTxt4[i][1], findTxt3[i][1], findTxt2[i][1], findTxt5[i][1])
+			f.WriteString(findTxt4[i][1] + "\t" + findTxt3[i][1] + "\t" + findTxt2[i][1] + "\t" + findTxt5[i][1] + "\r\n")
 
 		}
 	}

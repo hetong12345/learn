@@ -8,10 +8,10 @@ import (
 
 func Ofactorial(num int64) int64 { //计算阶乘0的个数
 	// fmt.Println(num / 5.0)
-	var tmp int64 = num
+	var tmp = num
 	var n int
 	var res int64
-	var i int = 1
+	var i = 1
 	for {
 		tmp = tmp / 5.0
 		if tmp < 1 {

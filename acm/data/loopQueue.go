@@ -51,12 +51,20 @@ func (q *LoopQueue) resize(newCap int) LoopQueue {
 	*q = *nq
 	return *q
 }
-func (nq *LoopQueue) copyQueue(q *LoopQueue) LoopQueue {
-	for i := 0; i < q.GetSize(); i++ {
-		nq.data[i] = q.data[(i+q.front)%len(q.data)]
+
+//func (nq *LoopQueue) copyQueue(q *LoopQueue) LoopQueue {
+//	for i := 0; i < q.GetSize(); i++ {
+//		nq.data[i] = q.data[(i+q.front)%len(q.data)]
+//	}
+//	nq.front, nq.tail = 0, q.GetSize()
+//	return *nq
+//}
+func (q *LoopQueue) copyQueue(nq *LoopQueue) LoopQueue {
+	for i := 0; i < nq.GetSize(); i++ {
+		q.data[i] = nq.data[(i+nq.front)%len(nq.data)]
 	}
-	nq.front, nq.tail = 0, q.GetSize()
-	return *nq
+	q.front, q.tail = 0, nq.GetSize()
+	return *q
 }
 
 func (q *LoopQueue) GetCap() int {

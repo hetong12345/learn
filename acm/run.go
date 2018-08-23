@@ -20,6 +20,7 @@ func main() {
 	//fmt.Println(data.TestSet(treeSet).String())
 	s := "asddsa"
 	qqq(s)
+
 }
 
 func qqq(a interface{}) {

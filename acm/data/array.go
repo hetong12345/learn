@@ -85,12 +85,20 @@ func (a *arr) resize(len int) arr {
 	*a = *na
 	return *a
 }
-func (na *arr) copyArr(a *arr) arr {
-	for i := 0; i < a.size; i++ {
-		na.data[i] = a.data[i]
+
+//func (na *arr) copyArr(a *arr) arr {
+//	for i := 0; i < a.size; i++ {
+//		na.data[i] = a.data[i]
+//	}
+//	na.size = a.size
+//	return *na
+//}
+func (a *arr) copyArr(na *arr) arr {
+	for i := 0; i < na.size; i++ {
+		a.data[i] = na.data[i]
 	}
-	na.size = a.size
-	return *na
+	a.size = na.size
+	return *a
 }
 func (a *arr) Remove(index int) interface{} {
 	if index < 0 || index > a.size {

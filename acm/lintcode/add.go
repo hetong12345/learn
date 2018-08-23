@@ -5,6 +5,7 @@ import (
 	// "strconv"
 )
 
+//noinspection ALL
 func Oadd(a int64, b int64) int64 { //不使用加法，计算两数和
 	// fmt.Println("test")
 	r1 := a ^ b

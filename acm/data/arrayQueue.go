@@ -6,6 +6,7 @@ type ArrayQueue struct {
 	a *arr
 }
 
+//noinspection GoUnusedExportedFunction
 func CreateArrayQueue(cap int) *ArrayQueue {
 	return &ArrayQueue{CreateArray(cap)}
 }

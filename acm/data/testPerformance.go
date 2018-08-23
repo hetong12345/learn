@@ -81,7 +81,7 @@ func divideWord(path string) []string {
 	var wordMap []string
 	file, err := ioutil.ReadFile(path)
 	if err != nil {
-		fmt.Errorf("读文件错误", err)
+		fmt.Printf("读文件错误%v", err)
 	}
 	text := string(file)
 	//按字母读取，除26个字母（大小写）之外的所有字符均认为是分隔符

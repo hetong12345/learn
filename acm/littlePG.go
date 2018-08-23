@@ -14,7 +14,7 @@ func (ad *IPAddr) String() string {
 	return a
 }
 func Pic(dx, dy int) [][]uint8 {
-	ret := [][]uint8{}
+	var ret [][]uint8
 	for i := 0; i < dy; i++ {
 		x := make([]uint8, dx)
 		for j := 0; j < dx; j++ {

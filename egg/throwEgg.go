@@ -6,8 +6,8 @@ import (
 
 var floorSum int
 var floorbest int
-var nextFloor int = 1
-var operaSum int = 0
+var nextFloor = 1
+var operaSum = 0
 
 type egg struct {
 	num   int
@@ -47,7 +47,7 @@ func algo2() int {
 	nextFloor = 1
 	operaSum = 0
 
-	var urange int = 500
+	var urange = 500
 
 	for {
 		egg1.statu = isBroken(nextFloor)

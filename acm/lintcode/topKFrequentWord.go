@@ -8,27 +8,50 @@ import (
 func topKFrequentWords(words []string, k int) []string {
 	// write your code here
 	pq := make(PriorityQueue, k)
-	i := 0
+	items := map[string]int{}
 	for _, value := range words {
-		if pq.Len() < k {
-			pq.Push(&Item{
-				value:    value,
-				priority: 0,
-				index:    i,
-			})
-			i++
-
-		} else if pq.Len() == k {
-			heap.Init(&pq)
+		_, ok := items[value]
+		if ok {
+			items[value] = items[value] + 1
 		} else {
-
+			items[value] = 1
 		}
 	}
-	heap.Init(&pq)
+	fmt.Println(items)
+	i := 0
+	for key, value := range items {
+		if i < k {
+			pq[i] = &Item{
+				value:    key,
+				priority: value * -1,
+				index:    i,
+			}
+			//fmt.Println(pq[i])
+			fmt.Println(i)
+		} else if i == k {
+			fmt.Println("1", pq)
+			heap.Init(&pq)
+			fmt.Println("2", pq)
+		} else if pq.look().(*Item).priority < value {
 
-	fmt.Println(pq.Pop())
-	fmt.Println(pq.Pop())
-	fmt.Println(pq.Pop())
+			//pq.Pop()
+			//pq.Push(&Item{
+			//	value:    key,
+			//	priority: value * -1,
+			//})
+		}
+		i++
+	}
+	//fmt.Println(pq.Pop())
+	//fmt.Println(pq[0])
+	//fmt.Println(pq[1])
+	//reverse := sort.Reverse(pq)
+	//ret := make([]string, k)
+	//for _, value := range reverse.(PriorityQueue) {
+	//	ret[i] = value.value
+	//}
+	//fmt.Println(pq.Pop().(*Item))
+	//fmt.Println(reverse)
 	return nil
 }
 
@@ -67,6 +90,10 @@ func (pq *PriorityQueue) Pop() interface{} {
 	item := old[n-1]
 	item.index = -1 // for safety
 	*pq = old[0 : n-1]
+	return item
+}
+func (pq PriorityQueue) look() interface{} {
+	item := pq[0]
 	return item
 }
 

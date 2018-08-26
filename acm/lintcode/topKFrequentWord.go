@@ -5,7 +5,37 @@ import (
 	"fmt"
 )
 
-func topKFrequentWords(words []string, k int) []string {
+func topk(nums []int, k int) []int { //lintcode 544
+	// write your code here
+	pq := make(PriorityQueueInt, k)
+	for key, value := range nums {
+		if key < k {
+			pq[key] = &intItem{
+				value:    value,
+				priority: value * -1,
+				index:    key,
+			}
+		} else {
+			if key == k {
+				heap.Init(&pq)
+			}
+			if pq.look().(*intItem).priority < value {
+				pq[0] = &intItem{value, value * -1, 0}
+				heap.Fix(&pq, 0)
+			}
+		}
+	}
+	if len(nums) == k {
+		heap.Init(&pq)
+	}
+	ret := make([]int, k)
+	for i := k - 1; i >= 0; i-- {
+		ret[i] = heap.Pop(&pq).(*intItem).value
+	}
+	return ret[:]
+}
+
+func topKFrequentWords(words []string, k int) []string { //lintcode 471
 	// write your code here
 	pq := make(PriorityQueue, k)
 	items := map[string]int{}
@@ -21,7 +51,7 @@ func topKFrequentWords(words []string, k int) []string {
 	i := 0
 	for key, value := range items {
 		if i < k {
-			pq[i] = &Item{
+			pq[i] = &stringItem{
 				value:    key,
 				priority: value * -1,
 				index:    i,
@@ -32,10 +62,10 @@ func topKFrequentWords(words []string, k int) []string {
 			fmt.Println("1", pq)
 			heap.Init(&pq)
 			fmt.Println("2", pq)
-		} else if pq.look().(*Item).priority < value {
+		} else if pq.look().(*stringItem).priority < value {
 
 			//pq.Pop()
-			//pq.Push(&Item{
+			//pq.Push(&stringItem{
 			//	value:    key,
 			//	priority: value * -1,
 			//})
@@ -50,15 +80,15 @@ func topKFrequentWords(words []string, k int) []string {
 	//for _, value := range reverse.(PriorityQueue) {
 	//	ret[i] = value.value
 	//}
-	//fmt.Println(pq.Pop().(*Item))
+	//fmt.Println(pq.Pop().(*stringItem))
 	//fmt.Println(reverse)
 	return nil
 }
 
 // This example demonstrates a priority queue built using the heap interface.
 
-// An Item is something we manage in a priority queue.
-type Item struct {
+// An stringItem is something we manage in a priority queue.
+type stringItem struct {
 	value    string // The value of the item; arbitrary.
 	priority int    // The priority of the item in the queue.
 	// The index is needed by update and is maintained by the heap.Interface methods.
@@ -66,7 +96,7 @@ type Item struct {
 }
 
 // A PriorityQueue implements heap.Interface and holds Items.
-type PriorityQueue []*Item
+type PriorityQueue []*stringItem
 
 func (pq PriorityQueue) Len() int { return len(pq) }
 func (pq PriorityQueue) Less(i, j int) bool {
@@ -80,7 +110,7 @@ func (pq PriorityQueue) Swap(i, j int) {
 }
 func (pq *PriorityQueue) Push(x interface{}) {
 	n := len(*pq)
-	item := x.(*Item)
+	item := x.(*stringItem)
 	item.index = n
 	*pq = append(*pq, item)
 }
@@ -97,8 +127,52 @@ func (pq PriorityQueue) look() interface{} {
 	return item
 }
 
-// update modifies the priority and value of an Item in the queue.
-func (pq *PriorityQueue) update(item *Item, value string, priority int) {
+// update modifies the priority and value of an stringItem in the queue.
+func (pq *PriorityQueue) update(item *stringItem, value string, priority int) {
+	item.value = value
+	item.priority = priority
+	heap.Fix(pq, item.index)
+}
+
+type intItem struct {
+	value    int // The value of the item; arbitrary.
+	priority int // The priority of the item in the queue.
+	// The index is needed by update and is maintained by the heap.Interface methods.
+	index int // The index of the item in the heap.
+}
+
+type PriorityQueueInt []*intItem
+
+func (pq PriorityQueueInt) Len() int { return len(pq) }
+func (pq PriorityQueueInt) Less(i, j int) bool {
+	// We want Pop to give us the highest, not lowest, priority so we use greater than here.
+	return pq[i].priority > pq[j].priority
+}
+func (pq PriorityQueueInt) Swap(i, j int) {
+	pq[i], pq[j] = pq[j], pq[i]
+	pq[i].index = i
+	pq[j].index = j
+}
+func (pq *PriorityQueueInt) Push(x interface{}) {
+	n := len(*pq)
+	item := x.(*intItem)
+	item.index = n
+	*pq = append(*pq, item)
+}
+func (pq *PriorityQueueInt) Pop() interface{} {
+	old := *pq
+	n := len(old)
+	item := old[n-1]
+	item.index = -1 // for safety
+	*pq = old[0 : n-1]
+	return item
+}
+func (pq PriorityQueueInt) look() interface{} {
+	return pq[0]
+}
+
+// update modifies the priority and value of an stringItem in the queue.
+func (pq *PriorityQueueInt) update(item *intItem, value int, priority int) {
 	item.value = value
 	item.priority = priority
 	heap.Fix(pq, item.index)
@@ -116,7 +190,7 @@ func ExamplePriorityQueue() {
 	pq := make(PriorityQueue, len(items))
 	i := 0
 	for value, priority := range items {
-		pq[i] = &Item{
+		pq[i] = &stringItem{
 			value:    value,
 			priority: priority,
 			index:    i,
@@ -125,7 +199,7 @@ func ExamplePriorityQueue() {
 	}
 	heap.Init(&pq)
 	// Insert a new item and then modify its priority.
-	item := &Item{
+	item := &stringItem{
 		value:    "orange",
 		priority: 1,
 	}
@@ -133,7 +207,7 @@ func ExamplePriorityQueue() {
 	pq.update(item, item.value, 5)
 	// Take the items out; they arrive in decreasing priority order.
 	for pq.Len() > 0 {
-		item := heap.Pop(&pq).(*Item)
+		item := heap.Pop(&pq).(*stringItem)
 		fmt.Printf("%.2d:%s ", item.priority, item.value)
 	}
 	// Output:

@@ -1,4 +1,4 @@
-package main
+package single
 
 import (
 	"fmt"
@@ -11,7 +11,7 @@ var operaSum = 0
 
 type egg struct {
 	num   int
-	statu bool
+	stats bool
 }
 
 var egg1 = &egg{1, false}
@@ -33,8 +33,8 @@ func algo1() int { //解决算法，提供下层楼数
 	nextFloor = 1
 	operaSum = 0
 	for {
-		egg1.statu = isBroken(nextFloor)
-		if egg1.statu {
+		egg1.stats = isBroken(nextFloor)
+		if egg1.stats {
 			break
 		}
 		nextFloor++
@@ -50,8 +50,8 @@ func algo2() int {
 	var urange = 500
 
 	for {
-		egg1.statu = isBroken(nextFloor)
-		if egg1.statu {
+		egg1.stats = isBroken(nextFloor)
+		if egg1.stats {
 			break
 		}
 		nextFloor += urange
@@ -59,8 +59,8 @@ func algo2() int {
 	}
 	nextFloor -= urange
 	for {
-		egg2.statu = isBroken(nextFloor)
-		if egg2.statu {
+		egg2.stats = isBroken(nextFloor)
+		if egg2.stats {
 			break
 		}
 		nextFloor++

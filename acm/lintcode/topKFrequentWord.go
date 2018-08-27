@@ -3,6 +3,7 @@ package lintcode
 import (
 	"container/heap"
 	"fmt"
+	"sort"
 )
 
 func topk(nums []int, k int) []int { //lintcode 544
@@ -49,40 +50,44 @@ func topKFrequentWords(words []string, k int) []string { //lintcode 471
 	}
 	fmt.Println(items)
 	i := 0
-	for key, value := range items {
+	for word, freq := range items {
 		if i < k {
 			pq[i] = &stringItem{
-				value:    key,
-				priority: value * -1,
+				value:    word,
+				priority: freq * -1,
 				index:    i,
 			}
-			//fmt.Println(pq[i])
-			fmt.Println(i)
-		} else if i == k {
-			fmt.Println("1", pq)
-			heap.Init(&pq)
-			fmt.Println("2", pq)
-		} else if pq.look().(*stringItem).priority < value {
-
-			//pq.Pop()
-			//pq.Push(&stringItem{
-			//	value:    key,
-			//	priority: value * -1,
-			//})
+		} else {
+			if i == k {
+				heap.Init(&pq)
+			}
+			fmt.Println(pq[0].value, pq[0].priority, freq*-1)
+			//if pq.look().(*stringItem).priority == freq*-1 {
+			if pq[0].priority == freq*-1 {
+				fmt.Println("============")
+				str := []string{pq[0].value, word}
+				sort.Strings(str)
+				fmt.Println(str)
+				pq[0] = &stringItem{str[0], freq * -1, 0}
+			}
+			//if pq.look().(*stringItem).priority > freq* -1 {
+			if pq[0].priority > freq*-1 {
+				fmt.Println("ccccccccccccc")
+				pq[0] = &stringItem{word, freq * -1, 0}
+				heap.Fix(&pq, 0)
+			}
 		}
 		i++
 	}
-	//fmt.Println(pq.Pop())
-	//fmt.Println(pq[0])
-	//fmt.Println(pq[1])
-	//reverse := sort.Reverse(pq)
-	//ret := make([]string, k)
-	//for _, value := range reverse.(PriorityQueue) {
-	//	ret[i] = value.value
-	//}
-	//fmt.Println(pq.Pop().(*stringItem))
-	//fmt.Println(reverse)
-	return nil
+
+	if len(items) == k {
+		heap.Init(&pq)
+	}
+	ret := make([]string, k)
+	for i := k - 1; i >= 0; i-- {
+		ret[i] = heap.Pop(&pq).(*stringItem).value
+	}
+	return ret[:]
 }
 
 // This example demonstrates a priority queue built using the heap interface.

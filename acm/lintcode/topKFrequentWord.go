@@ -50,6 +50,21 @@ func topKFrequentWords(words []string, k int) []string { //lintcode 471
 	}
 	fmt.Println(items)
 	i := 0
+	type bucket []string
+	buckets := map[int]bucket{}
+	for word, freq := range items {
+		i2 := buckets[freq]
+		i2 = append(i2, word)
+		sort.Strings(i2)
+		buckets[freq] = i2
+	}
+	fmt.Println(buckets)
+	var freq []int
+	for key := range buckets {
+		freq = append(freq, key)
+	}
+	sort.Ints(freq)
+	fmt.Println(freq)
 	for word, freq := range items {
 		if i < k {
 			pq[i] = &stringItem{
@@ -61,18 +76,18 @@ func topKFrequentWords(words []string, k int) []string { //lintcode 471
 			if i == k {
 				heap.Init(&pq)
 			}
-			fmt.Println(pq[0].value, pq[0].priority, freq*-1)
+			//fmt.Println(pq[0].value, pq[0].priority, word,freq*-1)
 			//if pq.look().(*stringItem).priority == freq*-1 {
 			if pq[0].priority == freq*-1 {
-				fmt.Println("============")
+				//fmt.Println("============")
 				str := []string{pq[0].value, word}
 				sort.Strings(str)
-				fmt.Println(str)
+				//fmt.Println(str)
 				pq[0] = &stringItem{str[0], freq * -1, 0}
 			}
 			//if pq.look().(*stringItem).priority > freq* -1 {
 			if pq[0].priority > freq*-1 {
-				fmt.Println("ccccccccccccc")
+				//fmt.Println("ccccccccccccc")
 				pq[0] = &stringItem{word, freq * -1, 0}
 				heap.Fix(&pq, 0)
 			}

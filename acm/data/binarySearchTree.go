@@ -84,7 +84,7 @@ func midOrder(node *treeNode) {
 	fmt.Println(node.value)
 	midOrder(node.right)
 }
-func (bst *BinarySearchTree) PostOrder() { //中序遍历
+func (bst *BinarySearchTree) PostOrder() { //后序遍历
 	postOrder(bst.root)
 }
 func postOrder(node *treeNode) {

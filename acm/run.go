@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"github.com/hetong12345/learn/acm/data"
 	"net/http"
 	//"reflect"
 	"runtime"
@@ -16,6 +17,14 @@ func main() {
 	//treeMap := data.CreateTreeMap()
 	//listSet := data.CreateListSet()
 	//treeSet := data.CreateTreeSet()
+	merge := data.Merger(
+		func(a interface{}, b interface{}) interface{} {
+			return a.(int) + b.(int)
+		})
+
+	segTree := data.CreateSegmentTree([]interface{}{1, 2, 3, 4, 5}, merge)
+
+	fmt.Println(segTree)
 
 	//maxHeap := data.CreateMaxHeap()
 	//fmt.Println(data.TestHeap(maxHeap, 1000000))
@@ -31,13 +40,13 @@ func main() {
 	//fmt.Println(DeferFunc2(1))
 	//fmt.Println(DeferFunc3(1))
 	//comp()
-	defer func() { fmt.Println("打印前") }()
-	defer func() { fmt.Println("打印中") }()
-	defer func() { fmt.Println("打印后") }()
-
-	panic("触发异常")
-	err := recover()
-	fmt.Println(err)
+	//defer func() { fmt.Println("打印前") }()
+	//defer func() { fmt.Println("打印中") }()
+	//defer func() { fmt.Println("打印后") }()
+	//
+	//panic("触发异常")
+	//err := recover()
+	//fmt.Println(err)
 }
 func comp() {
 	sn1 := struct {

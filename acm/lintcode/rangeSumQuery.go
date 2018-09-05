@@ -64,7 +64,31 @@ func (st *NumArray) query(index, l, r, qleft, qright int) int {
 	//return leftRes.merge(rightRes)
 	return merge(leftRes, rightRes)
 }
+func (st *NumArray) Update(i int, val int) {
+	if i < 0 || i >= len(st.data) {
+		panic("i of tree is illegal")
+	}
+	st.data[i] = val
+	st.set(0, 0, len(st.data)-1, i, val)
+}
 
+func (st *NumArray) set(tree, l, r, index int, e int) {
+	if l == r {
+		st.tree[tree] = e
+		return
+	}
+
+	left := st.leftChild(tree)
+	right := st.rightChild(tree)
+	mid := l + (r-l)/2
+
+	if index >= mid+1 {
+		st.set(right, mid+1, r, index, e)
+	} else {
+		st.set(left, l, mid, index, e)
+	}
+	st.tree[tree] = merge(st.tree[left], st.tree[right])
+}
 func (st *NumArray) GetSize() int {
 	return len(st.data)
 }

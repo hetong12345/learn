@@ -78,7 +78,22 @@ func (st *SegmentTree) Set(index int, e MergerAble) {
 }
 
 func (st *SegmentTree) set(tree, l, r, index int, e MergerAble) {
+	if l == r {
+		st.tree[tree] = e
+		return
+	}
 
+	left := st.leftChild(tree)
+	right := st.rightChild(tree)
+	mid := l + (r-l)/2
+
+	if index >= mid+1 {
+		st.set(right, mid+1, r, index, e)
+	} else {
+		st.set(left, l, mid, index, e)
+	}
+
+	st.tree[tree] = st.tree[left].merge(st.tree[right])
 }
 
 func (st *SegmentTree) GetSize() int {

@@ -43,7 +43,9 @@ type Tree interface {
 type Comparable interface {
 	Compare(c2 Comparable) int
 }
-
+type MergerAble interface {
+	merge(MergerAble) MergerAble
+}
 type Set interface {
 	//栈
 	GetSize() int

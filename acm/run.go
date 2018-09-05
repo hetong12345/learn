@@ -17,14 +17,16 @@ func main() {
 	//treeMap := data.CreateTreeMap()
 	//listSet := data.CreateListSet()
 	//treeSet := data.CreateTreeSet()
-	merge := data.Merger(
-		func(a interface{}, b interface{}) interface{} {
-			return a.(int) + b.(int)
-		})
+	//merge := data.Merger(
+	//	func(a interface{}, b interface{}) interface{} {
+	//		return a.(int) + b.(int)
+	//	})
 
-	segTree := data.CreateSegmentTree([]interface{}{1, 2, 3, 4, 5}, merge)
+	ints := []int{-2, 0, 3, -5, 2, -1}
+	segTree := data.CreateSegmentTree(data.TransInts(ints))
 
-	fmt.Println(segTree)
+	//fmt.Println(segTree.SumRange(1,1))
+	fmt.Println(segTree.Query(2, 5))
 
 	//maxHeap := data.CreateMaxHeap()
 	//fmt.Println(data.TestHeap(maxHeap, 1000000))

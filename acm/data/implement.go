@@ -13,7 +13,7 @@ func (p *Student) Compare(c2 Comparable) int {
 
 type Integer int
 
-func (i Integer) merge(i2 MergerAble) MergerAble {
+func (i Integer) Merge(i2 MergerAble) MergerAble {
 	return Integer(int(i) + int(i2.(Integer)))
 }
 

@@ -44,7 +44,7 @@ type Comparable interface {
 	Compare(c2 Comparable) int
 }
 type MergerAble interface {
-	merge(MergerAble) MergerAble
+	Merge(MergerAble) MergerAble
 }
 type Set interface {
 	//栈
@@ -57,6 +57,7 @@ type Set interface {
 }
 
 type Map interface {
+	//映射
 	Add(k interface{}, v interface{})
 	Remove(k interface{}) interface{}
 	Contains(key interface{}) bool
@@ -68,14 +69,23 @@ type Map interface {
 }
 
 type Heap interface {
+	//堆
 	Add(e Comparable)
 	Remove() Comparable
 	shiftUp(index int)
 	shiftDown(index int)
-	//Contains(key interface{}) bool
-	//Get(key interface{}) interface{}
-	//Set(key interface{}, newValue interface{})
 	GetSize() int
 	IsEmpty() bool
 	String() string
+}
+
+type SegmentTree interface {
+	//线段树
+	Query(l, r int) MergerAble
+	Set(index int, e MergerAble)
+	GetSize() int
+	String() string
+}
+
+type Trie interface {
 }

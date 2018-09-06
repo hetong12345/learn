@@ -16,18 +16,27 @@ func main() {
 	//listMap := data.CreateListMap()
 	//treeMap := data.CreateTreeMap()
 	//listSet := data.CreateListSet()
-	//treeSet := data.CreateTreeSet()
+	treeSet := data.CreateTreeSet()
+	trieSet := data.CreateMapTrie()
+
+	//fmt.Println(data.TestSet(listSet))
+	fmt.Println(data.TestSet(treeSet))
+	fmt.Println(data.TestSet(trieSet))
 	//merge := data.Merger(
 	//	func(a interface{}, b interface{}) interface{} {
 	//		return a.(int) + b.(int)
 	//	})
 
-	ints := []int{-2, 0, 3, -5, 2, -1}
-	segTree := data.CreateSegmentTree(data.TransInts(ints))
-
-	//fmt.Println(segTree.SumRange(1,1))
-	fmt.Println(segTree.Query(2, 5))
-
+	//ints := []int{-2, 0, 3, -5, 2, -1}
+	//segTree := data.CreateSegmentTree(data.TransInts(ints))
+	//
+	////fmt.Println(segTree.SumRange(1,1))
+	//fmt.Println(segTree.Query(2, 5))
+	//word:="apple"
+	//mapTrie := data.CreateMapTrie()
+	//mapTrie.Add(word)
+	//fmt.Println(mapTrie.Contains(word))
+	//fmt.Println(mapTrie.Contains("applee"))
 	//maxHeap := data.CreateMaxHeap()
 	//fmt.Println(data.TestHeap(maxHeap, 1000000))
 

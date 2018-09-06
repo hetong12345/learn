@@ -28,3 +28,6 @@ func (ls *ListSet) Remove(value Comparable) {
 func (ls *ListSet) Contains(value Comparable) bool {
 	return ls.il.Contains(value)
 }
+func (ls *ListSet) String() string {
+	return ls.il.String()
+}

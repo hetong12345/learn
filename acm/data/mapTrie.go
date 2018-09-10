@@ -10,17 +10,6 @@ type trieNode struct {
 	next   map[rune]*trieNode
 }
 
-//func createTrieNode() *trieNode {
-//	return &trieNode{
-//		isWord:false,
-//		next:map[rune]*trieNode{},
-//	}
-//}
-
-//func (tn *trieNode) IsWord() bool {
-//	return tn.isWord
-//}
-
 func CreateMapTrie() *MapTrie {
 	return &MapTrie{
 		root: &trieNode{
@@ -66,6 +55,18 @@ func (mt *MapTrie) Contains(word Comparable) bool {
 		cur = cur.next[value]
 	}
 	return cur.isWord
+}
+func (mt *MapTrie) IsPrefix(prefix Comparable) bool {
+	cur := mt.root
+	char := []rune(string(prefix.(Stringer)))
+
+	for _, value := range char {
+		if _, ok := cur.next[value]; !ok {
+			return false
+		}
+		cur = cur.next[value]
+	}
+	return true
 }
 
 func (mt *MapTrie) Remove(value Comparable) {

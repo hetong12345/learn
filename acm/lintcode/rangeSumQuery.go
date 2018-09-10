@@ -9,18 +9,19 @@ type NumArray struct {
 	tree []int
 }
 
-func Constructor(nums []int) NumArray {
-	if nums == nil || len(nums) == 0 {
-		return NumArray{}
-	}
-	tree := make([]int, len(nums)*4)
-	st := NumArray{
-		data: nums,
-		tree: tree,
-	}
-	st.buildSegmentTree(0, 0, len(nums)-1)
-	return st
-}
+//func Constructor(nums []int) NumArray {
+//	if nums == nil || len(nums) == 0 {
+//		return NumArray{}
+//	}
+//	tree := make([]int, len(nums)*4)
+//	st := NumArray{
+//		data: nums,
+//		tree: tree,
+//	}
+//	st.buildSegmentTree(0, 0, len(nums)-1)
+//	return st
+//}
+
 func (st *NumArray) buildSegmentTree(index, l, r int) {
 	if l == r {
 		st.tree[index] = st.data[l]

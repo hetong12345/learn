@@ -22,15 +22,15 @@ func TestProblem(t *testing.T) { //lintcode 1013
 	//coinProblem(100,30)
 	//ExamplePriorityQueue()
 
-	nums := []int{1, 3, 5}
-	obj := Constructor(nums)
+	obj := Constructor()
 
-	param_1 := obj.SumRange(0, 2)
-	obj.Update(1, 2)
+	obj.AddWord("bad")
+	obj.AddWord("dad")
+	obj.AddWord("mad")
 
-	param_2 := obj.SumRange(0, 2)
+	//param_2 := obj.SumRange(0, 2)
 	//param_3 := obj.SumRange(0,5)
-	fmt.Println(param_1)
-	fmt.Println(param_2)
+	fmt.Println(obj.Search("b.."))
+	//fmt.Println(param_2)
 	//fmt.Println(param_3)
 }

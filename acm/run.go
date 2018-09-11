@@ -3,9 +3,9 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/hetong12345/learn/acm/data"
 	"net/http"
 	//"reflect"
+	"github.com/hetong12345/learn/acm/data"
 	"runtime"
 	"sort"
 	"strconv"
@@ -16,12 +16,12 @@ func main() {
 	//listMap := data.CreateListMap()
 	//treeMap := data.CreateTreeMap()
 	//listSet := data.CreateListSet()
-	treeSet := data.CreateTreeSet()
-	trieSet := data.CreateMapTrie()
+	//treeSet := data.CreateTreeSet()
+	//trieSet := data.CreateMapTrie()
 
 	//fmt.Println(data.TestSet(listSet))
-	fmt.Println(data.TestSet(treeSet))
-	fmt.Println(data.TestSet(trieSet))
+	//fmt.Println(data.TestSet(treeSet))
+	//fmt.Println(data.TestSet(trieSet))
 	//merge := data.Merger(
 	//	func(a interface{}, b interface{}) interface{} {
 	//		return a.(int) + b.(int)
@@ -58,6 +58,11 @@ func main() {
 	//panic("触发异常")
 	//err := recover()
 	//fmt.Println(err)
+
+	find := data.CreateQuickFindUnionFind(5)
+	find.Union(1, 3)
+	find.Union(2, 3)
+	fmt.Println(find)
 }
 func comp() {
 	sn1 := struct {

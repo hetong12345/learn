@@ -1,30 +1,30 @@
 package data
 
-type MapTrie struct {
-	root *trieNode
+type TrieSet struct {
+	root *trieSetNode
 	size int
 }
 
-type trieNode struct {
+type trieSetNode struct {
 	isWord bool
-	next   map[rune]*trieNode
+	next   map[rune]*trieSetNode
 }
 
-func CreateMapTrie() *MapTrie {
-	return &MapTrie{
-		root: &trieNode{
+func CreateMapTrie() *TrieSet {
+	return &TrieSet{
+		root: &trieSetNode{
 			isWord: false,
-			next:   make(map[rune]*trieNode),
+			next:   make(map[rune]*trieSetNode),
 		},
 		size: 0,
 	}
 }
 
-func (mt *MapTrie) GetSize() int {
+func (mt *TrieSet) GetSize() int {
 	return mt.size
 }
 
-func (mt *MapTrie) Add(word Comparable) { //非递归写法 todo 完成add的递归写法
+func (mt *TrieSet) Add(word Comparable) { //非递归写法 todo 完成add的递归写法
 	cur := mt.root
 	char := []rune(string(word.(Stringer)))
 
@@ -32,9 +32,9 @@ func (mt *MapTrie) Add(word Comparable) { //非递归写法 todo 完成add的递
 		if _, ok := cur.next[value]; !ok {
 			//newNode :=createTrieNode()
 			//fmt.Println(newNode)
-			cur.next[value] = &trieNode{
+			cur.next[value] = &trieSetNode{
 				isWord: false,
-				next:   map[rune]*trieNode{},
+				next:   map[rune]*trieSetNode{},
 			}
 		}
 		cur = cur.next[value]
@@ -44,7 +44,7 @@ func (mt *MapTrie) Add(word Comparable) { //非递归写法 todo 完成add的递
 		mt.size++
 	}
 }
-func (mt *MapTrie) Contains(word Comparable) bool {
+func (mt *TrieSet) Contains(word Comparable) bool {
 	cur := mt.root
 	char := []rune(string(word.(Stringer)))
 
@@ -56,7 +56,7 @@ func (mt *MapTrie) Contains(word Comparable) bool {
 	}
 	return cur.isWord
 }
-func (mt *MapTrie) IsPrefix(prefix Comparable) bool {
+func (mt *TrieSet) IsPrefix(prefix Comparable) bool {
 	cur := mt.root
 	char := []rune(string(prefix.(Stringer)))
 
@@ -69,14 +69,14 @@ func (mt *MapTrie) IsPrefix(prefix Comparable) bool {
 	return true
 }
 
-func (mt *MapTrie) Remove(value Comparable) {
+func (mt *TrieSet) Remove(value Comparable) {
 	panic("implement me")
 }
 
-func (mt *MapTrie) IsEmpty() bool {
+func (mt *TrieSet) IsEmpty() bool {
 	return mt.size == 0
 }
 
-func (mt *MapTrie) String() string {
+func (mt *TrieSet) String() string {
 	panic("implement me")
 }

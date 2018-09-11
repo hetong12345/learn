@@ -24,13 +24,16 @@ func TestProblem(t *testing.T) { //lintcode 1013
 
 	obj := Constructor()
 
-	obj.AddWord("bad")
-	obj.AddWord("dad")
-	obj.AddWord("mad")
+	obj.Insert("a", 3)
+
+	fmt.Println(obj.Sum("ap"))
+	obj.Insert("b", 2)
+	fmt.Println(obj.Sum("a"))
+	//obj.AddWord("mad")
 
 	//param_2 := obj.SumRange(0, 2)
 	//param_3 := obj.SumRange(0,5)
-	fmt.Println(obj.Search("b.."))
+	//fmt.Println(obj.Search("b.."))
 	//fmt.Println(param_2)
 	//fmt.Println(param_3)
 }

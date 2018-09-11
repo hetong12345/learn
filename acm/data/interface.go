@@ -29,8 +29,8 @@ type Stack interface {
 	String() string
 }
 
+//树
 type Tree interface {
-	//树
 	GetSize() int
 	IsEmpty() bool
 	Add(value Comparable)
@@ -40,14 +40,19 @@ type Tree interface {
 	Max() Comparable
 	String() string
 }
+
+//Comparable 可比较的
 type Comparable interface {
 	Compare(c2 Comparable) int
 }
+
+//MergerAble 可合并的
 type MergerAble interface {
-	Merge(MergerAble) MergerAble
+	Merge(m2 MergerAble) MergerAble
 }
+
+//Set 集合
 type Set interface {
-	//栈
 	GetSize() int
 	IsEmpty() bool
 	Add(value Comparable)
@@ -56,8 +61,8 @@ type Set interface {
 	String() string
 }
 
+//Map 映射
 type Map interface {
-	//映射
 	Add(k interface{}, v interface{})
 	Remove(k interface{}) interface{}
 	Contains(key interface{}) bool
@@ -68,8 +73,8 @@ type Map interface {
 	String() string
 }
 
+//Heap 堆
 type Heap interface {
-	//堆
 	Add(e Comparable)
 	Remove() Comparable
 	shiftUp(index int)
@@ -79,13 +84,18 @@ type Heap interface {
 	String() string
 }
 
+//SegmentTree 线段树
 type SegmentTree interface {
-	//线段树
 	Query(l, r int) MergerAble
 	Set(index int, e MergerAble)
 	GetSize() int
 	String() string
 }
 
-type Trie interface {
+//UnionFind 并查集
+type UnionFind interface {
+	Union(p, q int)
+	IsConnected(p, q int) bool
+	GetSize() int
+	String() string
 }

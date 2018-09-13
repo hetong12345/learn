@@ -15,12 +15,14 @@ func CreateQuickFindUnionFind(size int) *QuickFindUnionFind {
 		id: arr,
 	}
 }
+
 func (qf *QuickFindUnionFind) find(x int) int {
 	if x < 0 || x >= qf.GetSize() {
 		panic("x is out of bound")
 	}
 	return qf.id[x]
 }
+
 func (qf *QuickFindUnionFind) Union(p, q int) {
 	pId := qf.find(p)
 	qId := qf.find(q)

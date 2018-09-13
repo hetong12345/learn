@@ -18,7 +18,11 @@ func main() {
 	//listSet := data.CreateListSet()
 	//treeSet := data.CreateTreeSet()
 	//trieSet := data.CreateMapTrie()
-
+	//quickFindUnionFind := data.CreateQuickFindUnionFind(100000)
+	quickUnionUnionFind := data.CreateQuickUnionUnionFind(100000)
+	op := 100000
+	//fmt.Println(data.TestUnionFind(quickFindUnionFind,op))
+	fmt.Println(data.TestUnionFind(quickUnionUnionFind, op))
 	//fmt.Println(data.TestSet(listSet))
 	//fmt.Println(data.TestSet(treeSet))
 	//fmt.Println(data.TestSet(trieSet))
@@ -59,10 +63,10 @@ func main() {
 	//err := recover()
 	//fmt.Println(err)
 
-	find := data.CreateQuickFindUnionFind(5)
-	find.Union(1, 3)
-	find.Union(2, 3)
-	fmt.Println(find)
+	//find := data.CreateQuickFindUnionFind(5)
+	//find.Union(1, 3)
+	//find.Union(2, 3)
+	//fmt.Println(find)
 }
 func comp() {
 	sn1 := struct {

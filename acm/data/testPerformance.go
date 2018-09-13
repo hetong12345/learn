@@ -126,3 +126,22 @@ func TestHeap(h Heap, op int) time.Duration {
 	}
 	return time.Since(startTime)
 }
+func TestUnionFind(uf UnionFind, op int) time.Duration {
+	startTime := time.Now()
+	rand.Seed(time.Now().Unix())
+	size := uf.GetSize()
+
+	for i := 0; i < op; i++ {
+		a := rand.Intn(size)
+		b := rand.Intn(size)
+		uf.Union(a, b)
+	}
+
+	for i := 0; i < op; i++ {
+		a := rand.Intn(size)
+		b := rand.Intn(size)
+		uf.IsConnected(a, b)
+	}
+
+	return time.Since(startTime)
+}

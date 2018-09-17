@@ -10,7 +10,7 @@ type trieSetNode struct {
 	next   map[rune]*trieSetNode
 }
 
-func CreateMapTrie() *TrieSet {
+func CreateSetTrie() *TrieSet {
 	return &TrieSet{
 		root: &trieSetNode{
 			isWord: false,

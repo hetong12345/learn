@@ -58,7 +58,6 @@ func TestMap(m Map) time.Duration {
 	//file := "./acm/测试文本"
 
 	word := divideWord(file)
-	fmt.Println(len(word))
 
 	for _, value := range word {
 		ls := strings.ToLower(value)
@@ -70,9 +69,13 @@ func TestMap(m Map) time.Duration {
 			m.Set(s, num.(int)+1)
 		}
 	}
+	fmt.Print("单词的个数是：")
 	fmt.Println(m.GetSize())
+	fmt.Print("the 的个数是：")
 	fmt.Println(m.Get(Stringer("the")))
+	fmt.Print("pride 的个数是：")
 	fmt.Println(m.Get(Stringer("pride")))
+	fmt.Print("prejudice 的个数是：")
 	fmt.Println(m.Get(Stringer("prejudice")))
 
 	return time.Since(startTime)

@@ -71,32 +71,6 @@ func (tm *TreeMap) remove(node *treeMapNode, k interface{}) *treeMapNode {
 		node.left, node.right = nil, nil
 		return ret
 	}
-	//if k.Compare(node.value) < 0 {
-	//	node.left = bst.remove(node.left, value)
-	//	return node
-	//} else if value.Compare(node.value) > 0 {
-	//	node.right = bst.remove(node.right, value)
-	//	return node
-	//} else {
-	//	if node.left == nil {
-	//		right := node.right
-	//		node.right = nil
-	//		bst.size--
-	//		return right
-	//	} else if node.right == nil {
-	//		left := node.left
-	//		node.left = nil
-	//		bst.size--
-	//		return left
-	//	}
-	//
-	//	ret := min(node.right)
-	//	ret.right = removeMin(node.right)
-	//	ret.left = node.left
-	//	node.left, node.right = nil, nil
-	//	return ret
-	//
-	//}
 }
 
 func (tm *TreeMap) min(node *treeMapNode) *treeMapNode {
@@ -176,21 +150,21 @@ func (tm *TreeMap) IsEmpty() bool {
 
 func (tm *TreeMap) String() string {
 	str := ""
-	return createString2(tm.root, 0, str)
+	return tm.createString2(tm.root, 0, str)
 }
 
-func createString2(node *treeMapNode, depth int, str string) string {
+func (tm *TreeMap) createString2(node *treeMapNode, depth int, str string) string {
 	if node == nil {
-		str += depthString2(depth) + "nil \n"
+		str += tm.depthString2(depth) + "nil \n"
 		return str
 	}
 
-	str += depthString2(depth) + "key:" + fmt.Sprint(node.key) + " value:" + fmt.Sprint(node.value) + "\n"
-	str = createString2(node.left, depth+1, str)
-	str = createString2(node.right, depth+1, str)
+	str += tm.depthString2(depth) + "key:" + fmt.Sprint(node.key) + " value:" + fmt.Sprint(node.value) + "\n"
+	str = tm.createString2(node.left, depth+1, str)
+	str = tm.createString2(node.right, depth+1, str)
 	return str
 }
-func depthString2(depth int) string {
+func (tm *TreeMap) depthString2(depth int) string {
 	str := fmt.Sprint("")
 	for i := 0; i < depth; i++ {
 		str += fmt.Sprint("--")

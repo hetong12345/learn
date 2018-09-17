@@ -14,59 +14,18 @@ import (
 
 func main() {
 	//listMap := data.CreateListMap()
-	//treeMap := data.CreateTreeMap()
+	treeMap := data.CreateTreeMap()
+	avlTreeMap := data.CreateAvlTreeMap()
 	//listSet := data.CreateListSet()
 	//treeSet := data.CreateTreeSet()
-	//trieSet := data.CreateMapTrie()
-	//quickFindUnionFind := data.CreateQuickFindUnionFind(100000)
-	quickUnionUnionFind := data.CreateQuickUnionUnionFind(100000)
-	op := 100000
-	//fmt.Println(data.TestUnionFind(quickFindUnionFind,op))
-	fmt.Println(data.TestUnionFind(quickUnionUnionFind, op))
-	//fmt.Println(data.TestSet(listSet))
-	//fmt.Println(data.TestSet(treeSet))
-	//fmt.Println(data.TestSet(trieSet))
-	//merge := data.Merger(
-	//	func(a interface{}, b interface{}) interface{} {
-	//		return a.(int) + b.(int)
-	//	})
+	//trieSet := data.CreateSetTrie()
 
-	//ints := []int{-2, 0, 3, -5, 2, -1}
-	//segTree := data.CreateSegmentTree(data.TransInts(ints))
-	//
-	////fmt.Println(segTree.SumRange(1,1))
-	//fmt.Println(segTree.Query(2, 5))
-	//word:="apple"
-	//mapTrie := data.CreateMapTrie()
-	//mapTrie.Add(word)
-	//fmt.Println(mapTrie.Contains(word))
-	//fmt.Println(mapTrie.Contains("applee"))
-	//maxHeap := data.CreateMaxHeap()
-	//fmt.Println(data.TestHeap(maxHeap, 1000000))
+	//fmt.Println(data.TestMap(listMap))
+	fmt.Println(data.TestMap(treeMap))
+	fmt.Println(data.TestMap(avlTreeMap))
 
-	//convString()
-	//
-	//sortSlice()
-	//waitGroup()
-	//testGroup()
-	//paseStudent()
+	//data.TestMap(trieSet)
 
-	//fmt.Println(DeferFunc1(1))
-	//fmt.Println(DeferFunc2(1))
-	//fmt.Println(DeferFunc3(1))
-	//comp()
-	//defer func() { fmt.Println("打印前") }()
-	//defer func() { fmt.Println("打印中") }()
-	//defer func() { fmt.Println("打印后") }()
-	//
-	//panic("触发异常")
-	//err := recover()
-	//fmt.Println(err)
-
-	//find := data.CreateQuickFindUnionFind(5)
-	//find.Union(1, 3)
-	//find.Union(2, 3)
-	//fmt.Println(find)
 }
 func comp() {
 	sn1 := struct {

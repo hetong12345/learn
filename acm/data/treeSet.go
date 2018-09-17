@@ -4,6 +4,14 @@ type TreeSet struct {
 	bst *BinarySearchTree
 }
 
+func (ts *TreeSet) Min() Comparable {
+	return ts.bst.Min()
+}
+
+func (ts *TreeSet) Max() Comparable {
+	return ts.bst.Max()
+}
+
 func CreateTreeSet() *TreeSet {
 	return &TreeSet{CreateBinarySearchTree()}
 }

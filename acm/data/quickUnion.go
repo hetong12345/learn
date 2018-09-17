@@ -25,6 +25,7 @@ func (qf *QuickUnionUnionFind) find(x int) int {
 		panic("x is out of bound")
 	}
 	for x != qf.parent[x] {
+		qf.parent[x] = qf.parent[qf.parent[x]]
 		x = qf.parent[x]
 	}
 	return x

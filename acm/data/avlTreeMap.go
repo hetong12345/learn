@@ -36,11 +36,16 @@ func (atm *AvlTreeMap) IsBST(node *avlTreeMapNode) int {
 	}
 	return node.height
 }
-func (atm *AvlTreeMap) inOrder(node *avlTreeMapNode) int {
+func (atm *AvlTreeMap) MidOrder() { //中序遍历
+	atm.midOrder(atm.root)
+}
+func (atm *AvlTreeMap) midOrder(node *avlTreeMapNode) {
 	if node == nil {
-		return 0
+		return
 	}
-	return node.height
+	atm.midOrder(node.left)
+	fmt.Println(node.value)
+	atm.midOrder(node.right)
 }
 func (atm *AvlTreeMap) getBalanceFactor(node *avlTreeMapNode) int {
 	if node == nil {

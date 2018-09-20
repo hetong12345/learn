@@ -30,22 +30,24 @@ func (atm *AvlTreeMap) getHeight(node *avlTreeMapNode) int {
 	}
 	return node.height
 }
-func (atm *AvlTreeMap) IsBST(node *avlTreeMapNode) int {
-	if node == nil {
-		return 0
+func (atm *AvlTreeMap) IsBST() bool {
+	arr := []Comparable{}
+	atm.midOrder(atm.root, arr)
+	for i := 1; i < len(arr); i++ {
+		if arr[i-1].Compare(arr[i]) > 0 {
+			return false
+		}
 	}
-	return node.height
+	return true
 }
-func (atm *AvlTreeMap) MidOrder() { //中序遍历
-	atm.midOrder(atm.root)
-}
-func (atm *AvlTreeMap) midOrder(node *avlTreeMapNode) {
+
+func (atm *AvlTreeMap) midOrder(node *avlTreeMapNode, arr []Comparable) {
 	if node == nil {
 		return
 	}
-	atm.midOrder(node.left)
-	fmt.Println(node.value)
-	atm.midOrder(node.right)
+	atm.midOrder(node.left, arr)
+	arr = append(arr, node.key)
+	atm.midOrder(node.right, arr)
 }
 func (atm *AvlTreeMap) getBalanceFactor(node *avlTreeMapNode) int {
 	if node == nil {
@@ -53,7 +55,26 @@ func (atm *AvlTreeMap) getBalanceFactor(node *avlTreeMapNode) int {
 	}
 	return atm.getHeight(node.left) - atm.getHeight(node.right)
 }
+func (atm *AvlTreeMap) IsBalanced() bool {
+	return atm.isBalanced(atm.root)
+}
+func (atm *AvlTreeMap) isBalanced(node *avlTreeMapNode) bool {
+	if node == nil {
+		return true
+	}
 
+	balanceFactor := atm.getBalanceFactor(node)
+	if math.Abs(float64(balanceFactor)) > 1 {
+		return false
+	}
+	//if !atm.isBalanced(node.left) {
+	//	return false
+	//}else if !atm.isBalanced(node.right) {
+	//	return false
+	//}
+	//return true
+	return atm.isBalanced(node.left) && atm.isBalanced(node.right)
+}
 func (atm *AvlTreeMap) Add(k interface{}, v interface{}) {
 	atm.root = atm.add(atm.root, k, v)
 }
@@ -68,14 +89,67 @@ func (atm *AvlTreeMap) add(node *avlTreeMapNode, k interface{}, v interface{}) *
 		node.right = atm.add(node.right, k, v)
 	} else {
 		node.value = v
+		return node
 	}
 
 	node.height = 1 + int(math.Max(float64(atm.getHeight(node.left)), float64(atm.getHeight(node.right))))
 
-	if math.Abs(float64(atm.getBalanceFactor(node))) > 1 {
-		fmt.Println("unbalanced", math.Abs(float64(atm.getBalanceFactor(node))))
+	balance := atm.getBalanceFactor(node)
+
+	if balance > 1 && atm.getBalanceFactor(node.left) >= 0 {
+		//RR
+		//fmt.Println(balance)
+		return atm.rightRotate(node)
+	}
+	if balance < -1 && atm.getBalanceFactor(node.right) <= 0 {
+		//LL
+		return atm.leftRotate(node)
+	}
+	if balance > 1 && atm.getBalanceFactor(node.left) < 0 {
+		//LR
+		node.left = atm.leftRotate(node.left)
+		return atm.rightRotate(node)
+	}
+	if balance < -1 && atm.getBalanceFactor(node.right) > 0 {
+		//LL
+		node.right = atm.rightRotate(node.right)
+		return atm.leftRotate(node)
 	}
 	return node
+}
+
+/*
+        y                  x          右旋转模式
+       / \                / \
+      x   t4            z    y
+     / \               / \  / \
+	z   t3           t1 t2 t3 t4
+   / \
+ t1  t2
+*/
+func (atm *AvlTreeMap) rightRotate(y *avlTreeMapNode) *avlTreeMapNode {
+	x := y.left
+	t3 := x.right
+
+	x.right = y
+	y.left = t3
+
+	y.height = int(math.Max(float64(atm.getHeight(y.left)), float64(atm.getHeight(y.right)))) + 1
+	x.height = int(math.Max(float64(atm.getHeight(x.left)), float64(atm.getHeight(x.right)))) + 1
+
+	return x
+}
+func (atm *AvlTreeMap) leftRotate(y *avlTreeMapNode) *avlTreeMapNode {
+	x := y.right
+	t2 := x.left
+
+	x.left = y
+	y.right = t2
+
+	y.height = int(math.Max(float64(atm.getHeight(y.left)), float64(atm.getHeight(y.right)))) + 1
+	x.height = int(math.Max(float64(atm.getHeight(x.left)), float64(atm.getHeight(x.right)))) + 1
+
+	return x
 }
 func (atm *AvlTreeMap) Remove(k interface{}) interface{} {
 	ret := atm.Get(k)

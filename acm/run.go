@@ -23,6 +23,8 @@ func main() {
 	//fmt.Println(data.TestMap(listMap))
 	fmt.Println(data.TestMap(treeMap))
 	fmt.Println(data.TestMap(avlTreeMap))
+	fmt.Println(avlTreeMap.IsBST())
+	fmt.Println(avlTreeMap.IsBalanced())
 
 	//data.TestMap(trieSet)
 

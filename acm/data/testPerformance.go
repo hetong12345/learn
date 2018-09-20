@@ -58,7 +58,7 @@ func TestMap(m Map) time.Duration {
 	//file := "./acm/测试文本"
 
 	word := divideWord(file)
-
+	//sort.Strings(word)
 	for _, value := range word {
 		ls := strings.ToLower(value)
 		s := Stringer(ls)
@@ -68,6 +68,9 @@ func TestMap(m Map) time.Duration {
 		} else {
 			m.Set(s, num.(int)+1)
 		}
+	}
+	for _, value := range word {
+		m.Contains(Stringer(value))
 	}
 	fmt.Print("单词的个数是：")
 	fmt.Println(m.GetSize())

@@ -160,31 +160,60 @@ func (atm *AvlTreeMap) remove(node *avlTreeMapNode, k interface{}) *avlTreeMapNo
 	if node == nil {
 		return nil
 	}
+
+	var retNode *avlTreeMapNode
 	if k.(Comparable).Compare(node.key) < 0 {
 		node.left = atm.remove(node.left, k)
-		return node
+		retNode = node
 	} else if k.(Comparable).Compare(node.key) > 0 {
 		node.right = atm.remove(node.right, k)
-		return node
+		retNode = node
 	} else {
 		if node.left == nil {
 			right := node.right
 			node.right = nil
 			atm.size--
-			return right
+			retNode = right
 		} else if node.right == nil {
 			left := node.left
 			node.left = nil
 			atm.size--
-			return left
-		} //todo complete this part
-
-		ret := atm.min(node.right)
-		ret.right = atm.remove(node.right, ret.key)
-		ret.left = node.left
-		node.left, node.right = nil, nil
-		return ret
+			retNode = left
+		} else {
+			ret := atm.min(node.right)
+			ret.right = atm.remove(node.right, ret.key)
+			ret.left = node.left
+			node.left, node.right = nil, nil
+			retNode = ret
+		}
 	}
+	if retNode == nil {
+		return nil
+	}
+	retNode.height = 1 + int(math.Max(float64(atm.getHeight(retNode.left)), float64(atm.getHeight(retNode.right))))
+
+	balance := atm.getBalanceFactor(retNode)
+
+	if balance > 1 && atm.getBalanceFactor(retNode.left) >= 0 {
+		//RR
+		//fmt.Println(balance)
+		return atm.rightRotate(retNode)
+	}
+	if balance < -1 && atm.getBalanceFactor(retNode.right) <= 0 {
+		//LL
+		return atm.leftRotate(retNode)
+	}
+	if balance > 1 && atm.getBalanceFactor(retNode.left) < 0 {
+		//LR
+		retNode.left = atm.leftRotate(retNode.left)
+		return atm.rightRotate(retNode)
+	}
+	if balance < -1 && atm.getBalanceFactor(retNode.right) > 0 {
+		//LL
+		retNode.right = atm.rightRotate(retNode.right)
+		return atm.leftRotate(retNode)
+	}
+	return retNode
 }
 
 func (atm *AvlTreeMap) min(node *avlTreeMapNode) *avlTreeMapNode {

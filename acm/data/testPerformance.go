@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"math/rand"
+	"sort"
 	"strings"
 	"time"
 )
@@ -38,7 +39,7 @@ func TestSet(s Set) time.Duration {
 	//file := "./acm/测试文本"
 
 	word := divideWord(file)
-	fmt.Println(len(word))
+	sort.Strings(word)
 
 	for _, value := range word {
 
@@ -69,9 +70,7 @@ func TestMap(m Map) time.Duration {
 			m.Set(s, num.(int)+1)
 		}
 	}
-	for _, value := range word {
-		m.Contains(Stringer(value))
-	}
+
 	fmt.Print("单词的个数是：")
 	fmt.Println(m.GetSize())
 	fmt.Print("the 的个数是：")
@@ -80,7 +79,9 @@ func TestMap(m Map) time.Duration {
 	fmt.Println(m.Get(Stringer("pride")))
 	fmt.Print("prejudice 的个数是：")
 	fmt.Println(m.Get(Stringer("prejudice")))
-
+	for _, value := range word {
+		m.Remove(Stringer(value))
+	}
 	return time.Since(startTime)
 }
 func divideWord(path string) []string {

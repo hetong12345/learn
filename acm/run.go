@@ -14,19 +14,24 @@ import (
 
 func main() {
 	//listMap := data.CreateListMap()
-	treeMap := data.CreateTreeMap()
-	avlTreeMap := data.CreateAvlTreeMap()
+	//treeMap := data.CreateTreeMap()
+	//avlTreeMap := data.CreateAvlTreeMap()
+
 	//listSet := data.CreateListSet()
-	//treeSet := data.CreateTreeSet()
-	//trieSet := data.CreateSetTrie()
+	treeSet := data.CreateTreeSet()
+	trieSet := data.CreateTrieSet()
+	avlTreeSet := data.CreateAvlTreeSet()
 
 	//fmt.Println(data.TestMap(listMap))
-	fmt.Println(data.TestMap(treeMap))
-	fmt.Println(data.TestMap(avlTreeMap))
-	fmt.Println(avlTreeMap.IsBST())
-	fmt.Println(avlTreeMap.IsBalanced())
+	//fmt.Println(data.TestMap(treeMap))
+	//fmt.Println(data.TestMap(avlTreeMap))
+	//fmt.Println(avlTreeMap.IsBST())
+	//fmt.Println(avlTreeMap.IsBalanced())
 
-	//data.TestMap(trieSet)
+	//fmt.Println(data.TestSet(listSet))
+	fmt.Println(data.TestSet(treeSet))
+	fmt.Println(data.TestSet(trieSet))
+	fmt.Println(data.TestSet(avlTreeSet))
 
 }
 func comp() {

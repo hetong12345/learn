@@ -3,6 +3,7 @@ package data
 import (
 	"fmt"
 	"io/ioutil"
+	"math"
 	"math/rand"
 	"sort"
 	"strings"
@@ -51,7 +52,22 @@ func TestSet(s Set) time.Duration {
 
 	return time.Since(startTime)
 }
+func TestBigData(op int, m Map) time.Duration {
+	startTime := time.Now()
+	rand.Seed(time.Now().Unix())
 
+	a := make([]Integer, op)
+	for i := 0; i < op; i++ {
+		a[i] = Integer(rand.Intn(math.MaxInt32))
+	}
+
+	redBlackTreeMap := CreateRedBlackTreeMap()
+	for _, value := range a {
+		redBlackTreeMap.Add(value, nil)
+	}
+
+	return time.Since(startTime)
+}
 func TestMap(m Map) time.Duration {
 	startTime := time.Now()
 
@@ -80,7 +96,7 @@ func TestMap(m Map) time.Duration {
 	fmt.Print("prejudice 的个数是：")
 	fmt.Println(m.Get(Stringer("prejudice")))
 	for _, value := range word {
-		m.Remove(Stringer(value))
+		m.Contains(Stringer(value))
 	}
 	return time.Since(startTime)
 }

@@ -2,7 +2,7 @@ package data
 
 import "fmt"
 
-type TreeMap struct {
+type BSTreeMap struct {
 	root *treeMapNode
 	size int
 }
@@ -13,17 +13,17 @@ type treeMapNode struct {
 	left, right *treeMapNode
 }
 
-func CreateTreeMap() *TreeMap {
-	return &TreeMap{
+func CreateBSTreeMap() *BSTreeMap {
+	return &BSTreeMap{
 		root: nil,
 		size: 0,
 	}
 }
 
-func (tm *TreeMap) Add(k interface{}, v interface{}) {
+func (tm *BSTreeMap) Add(k interface{}, v interface{}) {
 	tm.root = tm.add(tm.root, k, v)
 }
-func (tm *TreeMap) add(node *treeMapNode, k interface{}, v interface{}) *treeMapNode {
+func (tm *BSTreeMap) add(node *treeMapNode, k interface{}, v interface{}) *treeMapNode {
 	if node == nil {
 		tm.size++
 		return &treeMapNode{key: k.(Comparable), value: v, left: nil, right: nil}
@@ -37,12 +37,12 @@ func (tm *TreeMap) add(node *treeMapNode, k interface{}, v interface{}) *treeMap
 	}
 	return node
 }
-func (tm *TreeMap) Remove(k interface{}) interface{} {
+func (tm *BSTreeMap) Remove(k interface{}) interface{} {
 	ret := tm.Get(k)
 	tm.root = tm.remove(tm.root, k)
 	return ret
 }
-func (tm *TreeMap) remove(node *treeMapNode, k interface{}) *treeMapNode {
+func (tm *BSTreeMap) remove(node *treeMapNode, k interface{}) *treeMapNode {
 	if node == nil {
 		return nil
 	}
@@ -63,32 +63,32 @@ func (tm *TreeMap) remove(node *treeMapNode, k interface{}) *treeMapNode {
 			node.left = nil
 			tm.size--
 			return left
-		} //todo complete this part
-
-		ret := tm.min(node.right)
-		ret.right = tm.remove(node.right, ret.key)
-		ret.left = node.left
-		node.left, node.right = nil, nil
-		return ret
+		} else {
+			ret := tm.min(node.right)
+			ret.right = tm.remove(node.right, ret.key)
+			ret.left = node.left
+			node.left, node.right = nil, nil
+			return ret
+		}
 	}
 }
 
-func (tm *TreeMap) min(node *treeMapNode) *treeMapNode {
+func (tm *BSTreeMap) min(node *treeMapNode) *treeMapNode {
 	if node.left == nil {
 		return node
 	}
 	return tm.min(node.left)
 }
-func (tm *TreeMap) max(node *treeMapNode) *treeMapNode {
+func (tm *BSTreeMap) max(node *treeMapNode) *treeMapNode {
 	if node.right == nil {
 		return node
 	}
 	return tm.max(node.right)
 }
-func (tm *TreeMap) Contains(key interface{}) bool {
+func (tm *BSTreeMap) Contains(key interface{}) bool {
 	return tm.contains(tm.root, key)
 }
-func (tm *TreeMap) contains(node *treeMapNode, key interface{}) bool {
+func (tm *BSTreeMap) contains(node *treeMapNode, key interface{}) bool {
 	if node == nil {
 		return false
 	} else if node.key == key {
@@ -100,10 +100,10 @@ func (tm *TreeMap) contains(node *treeMapNode, key interface{}) bool {
 		return tm.contains(node.right, key)
 	}
 }
-func (tm *TreeMap) Get(key interface{}) interface{} {
+func (tm *BSTreeMap) Get(key interface{}) interface{} {
 	return tm.get(tm.root, key)
 }
-func (tm *TreeMap) get(node *treeMapNode, key interface{}) interface{} {
+func (tm *BSTreeMap) get(node *treeMapNode, key interface{}) interface{} {
 	if tm.size == 0 {
 		return nil
 	}
@@ -119,10 +119,10 @@ func (tm *TreeMap) get(node *treeMapNode, key interface{}) interface{} {
 		return tm.get(node.right, key)
 	}
 }
-func (tm *TreeMap) Set(key interface{}, newValue interface{}) {
+func (tm *BSTreeMap) Set(key interface{}, newValue interface{}) {
 	tm.set(tm.root, key, newValue)
 }
-func (tm *TreeMap) set(node *treeMapNode, key interface{}, newValue interface{}) {
+func (tm *BSTreeMap) set(node *treeMapNode, key interface{}, newValue interface{}) {
 	if tm.size == 0 {
 		panic("bu cun zai zhe yang de key")
 	}
@@ -140,31 +140,31 @@ func (tm *TreeMap) set(node *treeMapNode, key interface{}, newValue interface{})
 		tm.set(node.right, key, newValue)
 	}
 }
-func (tm *TreeMap) GetSize() int {
+func (tm *BSTreeMap) GetSize() int {
 	return tm.size
 }
 
-func (tm *TreeMap) IsEmpty() bool {
+func (tm *BSTreeMap) IsEmpty() bool {
 	return tm.size == 0
 }
 
-func (tm *TreeMap) String() string {
+func (tm *BSTreeMap) String() string {
 	str := ""
-	return tm.createString2(tm.root, 0, str)
+	return tm.createString(tm.root, 0, str)
 }
 
-func (tm *TreeMap) createString2(node *treeMapNode, depth int, str string) string {
+func (tm *BSTreeMap) createString(node *treeMapNode, depth int, str string) string {
 	if node == nil {
-		str += tm.depthString2(depth) + "nil \n"
+		str += tm.depthString(depth) + "nil \n"
 		return str
 	}
 
-	str += tm.depthString2(depth) + "key:" + fmt.Sprint(node.key) + " value:" + fmt.Sprint(node.value) + "\n"
-	str = tm.createString2(node.left, depth+1, str)
-	str = tm.createString2(node.right, depth+1, str)
+	str += tm.depthString(depth) + "key:" + fmt.Sprint(node.key) + " value:" + fmt.Sprint(node.value) + "\n"
+	str = tm.createString(node.left, depth+1, str)
+	str = tm.createString(node.right, depth+1, str)
 	return str
 }
-func (tm *TreeMap) depthString2(depth int) string {
+func (tm *BSTreeMap) depthString(depth int) string {
 	str := fmt.Sprint("")
 	for i := 0; i < depth; i++ {
 		str += fmt.Sprint("--")

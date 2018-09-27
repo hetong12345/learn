@@ -293,21 +293,21 @@ func (atm *AvlTreeMap) IsEmpty() bool {
 
 func (atm *AvlTreeMap) String() string {
 	str := ""
-	return atm.createString2(atm.root, 0, str)
+	return atm.createString(atm.root, 0, str)
 }
 
-func (atm *AvlTreeMap) createString2(node *avlTreeMapNode, depth int, str string) string {
+func (atm *AvlTreeMap) createString(node *avlTreeMapNode, depth int, str string) string {
 	if node == nil {
-		str += atm.depthString2(depth) + "nil \n"
+		str += atm.depthString(depth) + "nil \n"
 		return str
 	}
 
-	str += atm.depthString2(depth) + "key:" + fmt.Sprint(node.key) + " value:" + fmt.Sprint(node.value) + "\n"
-	str = atm.createString2(node.left, depth+1, str)
-	str = atm.createString2(node.right, depth+1, str)
+	str += atm.depthString(depth) + "key:" + fmt.Sprint(node.key) + " value:" + fmt.Sprint(node.value) + "\n"
+	str = atm.createString(node.left, depth+1, str)
+	str = atm.createString(node.right, depth+1, str)
 	return str
 }
-func (atm *AvlTreeMap) depthString2(depth int) string {
+func (atm *AvlTreeMap) depthString(depth int) string {
 	str := fmt.Sprint("")
 	for i := 0; i < depth; i++ {
 		str += fmt.Sprint("--")

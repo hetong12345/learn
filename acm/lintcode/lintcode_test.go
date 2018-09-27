@@ -1,7 +1,6 @@
 package lintcode
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -22,13 +21,14 @@ func TestProblem(t *testing.T) { //lintcode 1013
 	//coinProblem(100,30)
 	//ExamplePriorityQueue()
 
-	obj := Constructor()
+	//obj := Constructor()
+	//fmt.Println(firstUniqChar("leetcode"))
+	//obj.Insert("a", 3)
 
-	obj.Insert("a", 3)
-
-	fmt.Println(obj.Sum("ap"))
-	obj.Insert("b", 2)
-	fmt.Println(obj.Sum("a"))
+	//
+	//fmt.Println(obj.Sum("ap"))
+	//obj.Insert("b", 2)
+	//fmt.Println(obj.Sum("a"))
 	//obj.AddWord("mad")
 
 	//param_2 := obj.SumRange(0, 2)

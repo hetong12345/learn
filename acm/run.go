@@ -3,9 +3,9 @@ package main
 import (
 	"errors"
 	"fmt"
-	"net/http"
-	//"reflect"
 	"github.com/hetong12345/learn/acm/data"
+	"net/http"
+
 	"runtime"
 	"sort"
 	"strconv"
@@ -14,24 +14,33 @@ import (
 
 func main() {
 	//listMap := data.CreateListMap()
-	//treeMap := data.CreateTreeMap()
+	//bsTreeMap := data.CreateBSTreeMap()
+	//redBlackTreeMap := data.CreateRedBlackTreeMap()
 	//avlTreeMap := data.CreateAvlTreeMap()
+	data.Te()
 
 	//listSet := data.CreateListSet()
-	treeSet := data.CreateTreeSet()
-	trieSet := data.CreateTrieSet()
-	avlTreeSet := data.CreateAvlTreeSet()
+	//treeSet := data.CreateBSTreeSet()
+	//bstSet := data.CreateBinarySearchTree()
+	//rbSet := data.CreateRedBlackTreeMap()
+	//trieSet := data.CreateTrieSet()
+	//avlTreeSet := data.CreateAvlTreeSet()
 
 	//fmt.Println(data.TestMap(listMap))
-	//fmt.Println(data.TestMap(treeMap))
+	//fmt.Println(data.TestMap(bsTreeMap))
+	//fmt.Println(data.TestMap(redBlackTreeMap))
 	//fmt.Println(data.TestMap(avlTreeMap))
 	//fmt.Println(avlTreeMap.IsBST())
 	//fmt.Println(avlTreeMap.IsBalanced())
-
+	//fmt.Println(data.TestBigData(5000000,bsTreeMap))
+	//fmt.Println(data.TestBigData(5000000,redBlackTreeMap))
+	//fmt.Println(data.TestBigData(5000000,avlTreeMap))
 	//fmt.Println(data.TestSet(listSet))
-	fmt.Println(data.TestSet(treeSet))
-	fmt.Println(data.TestSet(trieSet))
-	fmt.Println(data.TestSet(avlTreeSet))
+	//fmt.Println(data.TestSet(treeSet))
+	//fmt.Println(data.TestSet(bstSet))
+	//fmt.Println(data.TestSet(rbSet))
+	//fmt.Println(data.TestSet(trieSet))
+	//fmt.Println(data.TestSet(avlTreeSet))
 
 }
 func comp() {

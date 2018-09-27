@@ -5,13 +5,13 @@ import (
 )
 
 type BinarySearchTree struct {
-	root *treeNode
+	root *bsTreeNode
 	size int
 }
 
-type treeNode struct {
+type bsTreeNode struct {
 	value       Comparable
-	left, right *treeNode
+	left, right *bsTreeNode
 }
 
 func CreateBinarySearchTree() *BinarySearchTree {
@@ -32,10 +32,10 @@ func (bst *BinarySearchTree) IsEmpty() bool {
 func (bst *BinarySearchTree) Add(value Comparable) {
 	bst.root = bst.add(bst.root, value)
 }
-func (bst *BinarySearchTree) add(node *treeNode, value Comparable) *treeNode {
+func (bst *BinarySearchTree) add(node *bsTreeNode, value Comparable) *bsTreeNode {
 	if node == nil {
 		bst.size++
-		return &treeNode{value, nil, nil}
+		return &bsTreeNode{value, nil, nil}
 	}
 
 	if value.Compare(node.value) < 0 {
@@ -46,60 +46,60 @@ func (bst *BinarySearchTree) add(node *treeNode, value Comparable) *treeNode {
 	return node
 }
 func (bst *BinarySearchTree) Contains(value Comparable) bool {
-	return contains(bst.root, value)
+	return bst.contains(bst.root, value)
 }
-func contains(node *treeNode, value Comparable) bool {
+func (bst *BinarySearchTree) contains(node *bsTreeNode, value Comparable) bool {
 	if node == nil {
 		return false
 	} else if node.value == value {
 		return true
 	}
 	if value.Compare(node.value) < 0 {
-		return contains(node.left, value)
+		return bst.contains(node.left, value)
 	} else {
-		return contains(node.right, value)
+		return bst.contains(node.right, value)
 	}
 }
 
 func (bst *BinarySearchTree) PreOrder() { //前序遍历
-	preOrder(bst.root)
+	bst.preOrder(bst.root)
 }
-func preOrder(node *treeNode) {
+func (bst *BinarySearchTree) preOrder(node *bsTreeNode) {
 	if node == nil {
 		return
 	}
 	fmt.Println(node.value)
-	preOrder(node.left)
-	preOrder(node.right)
+	bst.preOrder(node.left)
+	bst.preOrder(node.right)
 }
 
 func (bst *BinarySearchTree) MidOrder() { //中序遍历
-	midOrder(bst.root)
+	bst.midOrder(bst.root)
 }
-func midOrder(node *treeNode) {
+func (bst *BinarySearchTree) midOrder(node *bsTreeNode) {
 	if node == nil {
 		return
 	}
-	midOrder(node.left)
+	bst.midOrder(node.left)
 	fmt.Println(node.value)
-	midOrder(node.right)
+	bst.midOrder(node.right)
 }
 func (bst *BinarySearchTree) PostOrder() { //后序遍历
-	postOrder(bst.root)
+	bst.postOrder(bst.root)
 }
-func postOrder(node *treeNode) {
+func (bst *BinarySearchTree) postOrder(node *bsTreeNode) {
 	if node == nil {
 		return
 	}
-	postOrder(node.left)
-	postOrder(node.right)
+	bst.postOrder(node.left)
+	bst.postOrder(node.right)
 	fmt.Println(node.value)
 }
 func (bst *BinarySearchTree) LevelOrder() {
 	lq := CreateLoopQueue(10)
 	lq.EnQueue(bst.root)
 	for !lq.IsEmpty() {
-		cur := lq.DeQueue().(*treeNode)
+		cur := lq.DeQueue().(*bsTreeNode)
 		fmt.Println(cur.value)
 		if cur.left != nil {
 			lq.EnQueue(cur.left)
@@ -113,64 +113,64 @@ func (bst *BinarySearchTree) Min() Comparable { //找出最小值
 	if bst.size == 0 {
 		return nil
 	}
-	return min(bst.root).value
+	return bst.min(bst.root).value
 }
-func min(node *treeNode) *treeNode {
+func (bst *BinarySearchTree) min(node *bsTreeNode) *bsTreeNode {
 	if node.left == nil {
 		return node
 	}
-	return min(node.left)
+	return bst.min(node.left)
 }
 
 func (bst *BinarySearchTree) RemoveMin() Comparable {
-	ret := min(bst.root)
-	bst.root = removeMin(bst.root)
+	ret := bst.min(bst.root)
+	bst.root = bst.removeMin(bst.root)
 	bst.size--
 	return ret.value
 }
-func removeMin(node *treeNode) *treeNode {
+func (bst *BinarySearchTree) removeMin(node *bsTreeNode) *bsTreeNode {
 	if node.left == nil {
 		right := node.right
 		node.right = nil
 		return right
 	}
 
-	node.left = removeMin(node.left)
+	node.left = bst.removeMin(node.left)
 	return node
 }
 func (bst *BinarySearchTree) Max() Comparable { //找出最大值
 	if bst.size == 0 {
 		return nil
 	}
-	return max(bst.root).value
+	return bst.max(bst.root).value
 }
-func max(node *treeNode) *treeNode {
+func (bst *BinarySearchTree) max(node *bsTreeNode) *bsTreeNode {
 	if node.right == nil {
 		return node
 	}
-	return max(node.right)
+	return bst.max(node.right)
 }
 func (bst *BinarySearchTree) RemoveMax() Comparable {
-	ret := max(bst.root)
-	bst.root = removeMax(bst.root)
+	ret := bst.max(bst.root)
+	bst.root = bst.removeMax(bst.root)
 	bst.size--
 	return ret.value
 }
-func removeMax(node *treeNode) *treeNode {
+func (bst *BinarySearchTree) removeMax(node *bsTreeNode) *bsTreeNode {
 	if node.right == nil {
 		left := node.left
 		node.right = nil
 		return left
 	}
 
-	node.right = removeMax(node.right)
+	node.right = bst.removeMax(node.right)
 	return node
 }
 
 func (bst *BinarySearchTree) Remove(value Comparable) {
 	bst.root = bst.remove(bst.root, value)
 }
-func (bst *BinarySearchTree) remove(node *treeNode, value Comparable) *treeNode {
+func (bst *BinarySearchTree) remove(node *bsTreeNode, value Comparable) *bsTreeNode {
 	if node == nil {
 		return nil
 	}
@@ -193,8 +193,8 @@ func (bst *BinarySearchTree) remove(node *treeNode, value Comparable) *treeNode 
 			return left
 		}
 
-		ret := min(node.right)
-		ret.right = removeMin(node.right)
+		ret := bst.min(node.right)
+		ret.right = bst.removeMin(node.right)
 		ret.left = node.left
 		node.left, node.right = nil, nil
 		return ret
@@ -204,20 +204,20 @@ func (bst *BinarySearchTree) remove(node *treeNode, value Comparable) *treeNode 
 }
 func (bst *BinarySearchTree) String() string {
 	str := ""
-	return createString(bst.root, 0, str)
+	return bst.createString(bst.root, 0, str)
 }
-func createString(node *treeNode, depth int, str string) string {
+func (bst *BinarySearchTree) createString(node *bsTreeNode, depth int, str string) string {
 	if node == nil {
-		str += depthString(depth) + "nil \n"
+		str += bst.depthString(depth) + "nil \n"
 		return str
 	}
 
-	str += depthString(depth) + fmt.Sprint(node.value) + "\n"
-	str = createString(node.left, depth+1, str)
-	str = createString(node.right, depth+1, str)
+	str += bst.depthString(depth) + fmt.Sprint(node.value) + "\n"
+	str = bst.createString(node.left, depth+1, str)
+	str = bst.createString(node.right, depth+1, str)
 	return str
 }
-func depthString(depth int) string {
+func (bst *BinarySearchTree) depthString(depth int) string {
 	str := fmt.Sprint("")
 	for i := 0; i < depth; i++ {
 		str += fmt.Sprint("--")

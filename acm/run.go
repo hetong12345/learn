@@ -3,9 +3,8 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/hetong12345/learn/acm/data"
+	"github.com/hetong12345/learn/acm/algorithm"
 	"net/http"
-
 	"runtime"
 	"sort"
 	"strconv"
@@ -13,35 +12,17 @@ import (
 )
 
 func main() {
-	//listMap := data.CreateListMap()
-	//bsTreeMap := data.CreateBSTreeMap()
-	//redBlackTreeMap := data.CreateRedBlackTreeMap()
-	//avlTreeMap := data.CreateAvlTreeMap()
-	data.Te()
+	//n := 100000
+	fmt.Println(algorithm.Comp("1.2.5c", "1.2.6b"))
+	//arr1 := algorithm.CreateRandomArray(n, 0, n)
+	//arr2 := algorithm.CreateRandomArray(n, 0, n)
+	//arr3 := algorithm.CreateRandomArray(n, 0, n)
+	//arr4 := algorithm.CreateRandomArray(n, 0, n)
 
-	//listSet := data.CreateListSet()
-	//treeSet := data.CreateBSTreeSet()
-	//bstSet := data.CreateBinarySearchTree()
-	//rbSet := data.CreateRedBlackTreeMap()
-	//trieSet := data.CreateTrieSet()
-	//avlTreeSet := data.CreateAvlTreeSet()
-
-	//fmt.Println(data.TestMap(listMap))
-	//fmt.Println(data.TestMap(bsTreeMap))
-	//fmt.Println(data.TestMap(redBlackTreeMap))
-	//fmt.Println(data.TestMap(avlTreeMap))
-	//fmt.Println(avlTreeMap.IsBST())
-	//fmt.Println(avlTreeMap.IsBalanced())
-	//fmt.Println(data.TestBigData(5000000,bsTreeMap))
-	//fmt.Println(data.TestBigData(5000000,redBlackTreeMap))
-	//fmt.Println(data.TestBigData(5000000,avlTreeMap))
-	//fmt.Println(data.TestSet(listSet))
-	//fmt.Println(data.TestSet(treeSet))
-	//fmt.Println(data.TestSet(bstSet))
-	//fmt.Println(data.TestSet(rbSet))
-	//fmt.Println(data.TestSet(trieSet))
-	//fmt.Println(data.TestSet(avlTreeSet))
-
+	//fmt.Println(algorithm.TestSort(algorithm.SelectionSort, arr1))
+	//fmt.Println(algorithm.TestSort(algorithm.InsertionSort, arr2))
+	//fmt.Println(algorithm.TestSort(algorithm.InsertionSort, arr3))
+	//fmt.Println(algorithm.TestSort(algorithm.BubbleSort, arr4))
 }
 func comp() {
 	sn1 := struct {

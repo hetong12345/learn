@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/hetong12345/learn/acm/algorithm"
+	"github.com/hetong12345/learn/acm/lintcode"
 	"net/http"
 	"runtime"
 	"sort"
@@ -11,9 +11,47 @@ import (
 	"sync"
 )
 
+func array_chunk(a []string, sz int) [][]string {
+	var n int = len(a) / sz // 二维数组的长度
+	if len(a) > n*sz {
+		n += 1
+	}
+	var b = make([][]string, 0, n)
+
+	for i := 0; i < len(a); i++ {
+		offset := i % sz
+		if offset == 0 {
+			b = append(b, make([]string, sz))
+		}
+		b[len(b)-1][offset] = a[i]
+	}
+	return b
+}
+
+func slice2d_toString(a [][]string) string {
+	s := "["
+
+	for i := 0; i < len(a); i++ {
+		s += "["
+		j := 0
+		for ; j < len(a[i])-1; j++ {
+			s += a[i][j] + ","
+		}
+		s += a[i][j] + "] "
+	}
+
+	s += "]"
+	return s
+}
+
 func main() {
-	//n := 100000
-	fmt.Println(algorithm.Comp("1.2.5c", "1.2.6b"))
+	//letters := []string{"a", "b", "c", "d", "e", "f", "g"}
+	//a2d := array_chunk(letters, 3)
+	//fmt.Printf(slice2d_toString(a2d))
+	////n := 100000
+	strs := []string{"aa", "a", "a"}
+	fmt.Println(lintcode.LongestCommonPrefix(strs))
+	//fmt.Println(algorithm.Comp("1.2.5c", "1.2.6b"))
 	//arr1 := algorithm.CreateRandomArray(n, 0, n)
 	//arr2 := algorithm.CreateRandomArray(n, 0, n)
 	//arr3 := algorithm.CreateRandomArray(n, 0, n)

@@ -10,7 +10,8 @@ import (
 
 const (
 	URL   = "http://api.ip138.com/query/"
-	TOKEN = "token=532950476e8471adfce7b4aafc52f07c"
+	TOKEN = "532950476e8471adfce7b4aafc52f07c"
+	//TOKEN = "bd4c2bf9a38ab06f7cae88c9759ee172"
 )
 
 //----------------------------------
@@ -41,12 +42,13 @@ type jsoninfo struct {
 }
 
 func main() {
-	ipLocation("43.224.45.105", "xml")
+	ipLocation("43.224.45.105", "json")
 }
 
 func ipLocation(ip string, dataType string) {
 
 	queryUrl := fmt.Sprintf("%s?ip=%s&datatype=%s", URL, ip, dataType)
+	fmt.Println(queryUrl)
 	client := &http.Client{}
 	reqest, err := http.NewRequest("GET", queryUrl, nil)
 
@@ -63,8 +65,8 @@ func ipLocation(ip string, dataType string) {
 	}
 	if response.StatusCode == 200 {
 		bodyByte, _ := ioutil.ReadAll(response.Body)
-		fmt.Println(bodyByte)
-		if dataType == "jsonp" {
+		fmt.Println(string(bodyByte))
+		if dataType == "json" {
 			var info jsoninfo
 			json.Unmarshal(bodyByte, &info)
 			fmt.Println(info.Ip)

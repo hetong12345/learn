@@ -1,4 +1,4 @@
-package main
+package single
 
 import (
 	"fmt"
@@ -7,7 +7,6 @@ import (
 	"os"
 	"regexp"
 	"strconv"
-	"time"
 )
 
 //定义新的数据类型
@@ -47,7 +46,7 @@ func parse() {
 	}
 
 	//创建excel文件
-	f, err := os.Create("C:/Go_WorkSpace/bin/haha3.txt")
+	f, err := os.Create("./douban.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -92,10 +91,10 @@ func parse() {
 	}
 }
 
-func main() {
-	t1 := time.Now() // get current time
-	parse()
-	elapsed := time.Since(t1)
-	fmt.Println("爬虫结束,总共耗时: ", elapsed)
-
-}
+//func main() {
+//	t1 := time.Now() // get current time
+//	parse()
+//	elapsed := time.Since(t1)
+//	fmt.Println("爬虫结束,总共耗时: ", elapsed)
+//
+//}

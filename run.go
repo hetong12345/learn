@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gomodule/redigo/redis"
+	"github.com/hetong12345/learn/single"
 	"io"
 	"net/http"
 	"time"
@@ -30,9 +32,13 @@ func firstPage(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
-	http.HandleFunc("/", firstPage)
-	http.ListenAndServe(":8000", nil)
+	//http.HandleFunc("/", firstPage)
+	//http.ListenAndServe(":8000", nil)
+	instance := single.GetInstance()
+	instance2 := single.GetInstance()
 
+	fmt.Println(instance)
+	fmt.Println(instance2)
 	//conn.Close()
 
 }

@@ -29,9 +29,10 @@ func Crawl(url string, depth int, fetcher Fetcher) {
 	return
 }
 
-func main() {
-	Crawl("https://golang.org/", 4, fetcher)
-}
+//
+//func main() {
+//	Crawl("https://golang.org/", 4, fetcher)
+//}
 
 // fakeFetcher 是返回若干结果的 Fetcher。
 type fakeFetcher map[string]*fakeResult

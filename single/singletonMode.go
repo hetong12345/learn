@@ -5,6 +5,7 @@ import (
 )
 
 type Singleton struct {
+	//go语言实现设计模式（一）：单例模式
 	name string
 	age  int
 }

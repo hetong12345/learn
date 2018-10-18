@@ -41,9 +41,9 @@ type jsoninfo struct {
 	Data [6]string `json:"data"`
 }
 
-func main() {
-	ipLocation("43.224.45.105", "json")
-}
+//func main() {
+//	ipLocation("43.224.45.105", "json")
+//}
 
 func ipLocation(ip string, dataType string) {
 
@@ -69,7 +69,7 @@ func ipLocation(ip string, dataType string) {
 		if dataType == "json" {
 			var info jsoninfo
 			json.Unmarshal(bodyByte, &info)
-			fmt.Println(info.Ip)
+			fmt.Println(info)
 		} else if dataType == "xml" {
 			var info xmlinfo
 			xml.Unmarshal(bodyByte, &info)

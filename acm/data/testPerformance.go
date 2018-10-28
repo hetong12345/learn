@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"math"
 	"math/rand"
+	"os"
 	"sort"
 	"strings"
 	"time"
@@ -102,6 +103,7 @@ func TestMap(m Map) time.Duration {
 }
 func divideWord(path string) []string {
 	var wordMap []string
+	fmt.Println(os.Executable())
 	file, err := ioutil.ReadFile(path)
 	if err != nil {
 		fmt.Printf("读文件错误%v", err)

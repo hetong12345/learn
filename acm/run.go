@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/hetong12345/learn/acm/lintcode"
+	"github.com/hetong12345/learn/acm/data"
 	"net/http"
 	"runtime"
 	"sort"
@@ -49,8 +49,9 @@ func main() {
 	//a2d := array_chunk(letters, 3)
 	//fmt.Printf(slice2d_toString(a2d))
 	////n := 100000
-	strs := []string{"aa", "a", "a"}
-	fmt.Println(lintcode.LongestCommonPrefix(strs))
+
+	set := data.CreateAvlTreeSet()
+	fmt.Println(data.TestSet(set))
 	//fmt.Println(algorithm.Comp("1.2.5c", "1.2.6b"))
 	//arr1 := algorithm.CreateRandomArray(n, 0, n)
 	//arr2 := algorithm.CreateRandomArray(n, 0, n)

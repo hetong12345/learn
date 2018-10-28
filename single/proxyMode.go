@@ -20,11 +20,11 @@ type AppHandler struct {
 }
 
 func (pA *AppHandler) HandleData(data string) (interface{}, error) {
-	if true { //Get Data from redis ok
-		fmt.Println("Get Data from redis")
+	if true { //Get Data from router ok
+		fmt.Println("Get Data from router")
 	} else {
 		pA.Handler.HandleData(data)
-		//store ret data data to redis
+		//store ret data data to router
 	}
 	return nil, nil
 }

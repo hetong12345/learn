@@ -27,3 +27,15 @@ func TestSort(sort func([]int) []int, arr []int) time.Duration { //测试排序�
 	}
 	return time.Since(starTime)
 }
+
+func CreateDeduplicationArray(len, lRange, rRange int) []int { //创建去重数组
+	if lRange > rRange {
+		panic("range error")
+	}
+	rand.Seed(time.Now().UnixNano())
+	arr := make([]int, len)
+	for key := range arr {
+		arr[key] = rand.Intn(rRange-lRange+1) + lRange
+	}
+	return arr
+}
